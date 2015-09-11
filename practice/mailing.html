@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+	<meta charset="utf-8">
+</head>
+
+<body>
+<!-- MAIN CONTAINER -->
+	<div class="wrapper">
+
+		
+<!-- MAIN MENU -->
+		<div class="main-menu-container">
+			<ul class="flex main-menu-styling styling-grey interaction">
+				<li>COMPANIES</li>
+				<li>MAILING</li>
+				<li>INVOICES</li>
+			</ul>
+		</div>
+<!-- main menu END -->
+
+<!-- DYNAMIC CONTENT CONTAINER -->
+		<div class="dynamic-content-container">
+<!-- DYNAMIC CONTENT FEATURES -->
+
+			<!-- DYNAMIC CONTENT FEATURES MENU-->
+			<ul class="flex feature-menu-styling styling-blue interaction">
+				<li id="search-mail">SEARCH MAILS</li>
+				<li id="add-mail">ADD MAIL</li>
+				<li id="modify-mail">EDIT MAILS</li>
+				<li id="forward-mail">FORWARD MAIL</li>
+			</ul>
+			<!-- dynamic content features menu END-->
+
+			<!-- SEARCH MAIL-->
+			<ul class="flex feature-styling styling-grey">
+				<li class="col-8-25"><label for="data-search">COMPANY NAME</label></li>
+				<li class="col-5-25"><label for="starting-date">STARTING DATE</label></li>
+				<li class="col-5-25"><label for="ending-date">ENDING DATE</label></li>
+				<li class="col-1-25"><input type="checkbox" id="non-forwarded"></li>
+				<li class="col-6-25"><label for="non-forwarded">NON-FORWARDED ONLY</label></li>
+				<li class="col-8-25"><input type="text" id="data-search"></li>
+				<li class="col-5-25"><input type="date" id="starting-date" checked></li>
+				<li class="col-5-25"><input type="date" id="ending-date"></li>
+				<li class="col-7-25"><input type="button" value="SEARCH"></li>
+			</ul><!-- search mail END-->
+
+			<!-- ADD MAIL-->
+			<ul class="flex feature-styling styling-grey">
+				<li class="col-1-25">/</li>
+				<li class="col-9-25">COMPANY NAME</li>
+				<li class="col-4-25">DATE</li>
+				<li class="col-4-25">FORW. DATE</li>
+				<li class="col-7-25">FORW. METHOD</li>
+				<li class="col-1-25">/</li>
+				<li class="col-9-25"><input type="text"></li>
+				<li class="col-4-25"><input type="date"></li>
+				<li class="col-4-25"><input type="date"></li>
+				<li class="col-7-25"><input type="text"></li>
+				<li class="col-10-25">SENDER NAME</li>
+				<li class="col-15-25">SENDER ADDRESS</li>
+				<li class="col-10-25"><input type="text"></li>
+				<li class="col-15-25"><input type="text"></li>
+				<li class="col-25-25"><input type="button" value="ADD MAIL"></li>
+			</ul><!-- add mail END-->
+
+			<!-- EDIT MAILS-->
+			<ul class="flex feature-styling styling-grey">
+				<li class="col-6-25"><input type="button" value="EDIT SELECTED"></li>
+				<li class="col-7-25"><input type="button" value="SAVE DATA INTO DATABASE"></li>
+				<li class="col-6-25"><input type="button" value="DELETE"></li>
+				<li class="col-6-25"><input type="button" value="CANCEL"></li>
+			</ul><!-- edit mails END-->
+
+			<!-- FORWARDING MAIL -->
+			<ul class="flex feature-styling styling-grey">
+				<li class="col-4-25">FORW. DATE</li>
+				<li class="col-5-25"><input type="date"></li>
+				<li class="col-4-25">FORW. METHOD</li>
+				<li class="col-7-25"><input type="text"></li>
+				<li class="col-5-25"><input type="button" value="EDIT SELECTED"></li>
+			</ul>
+			<ul class="flex feature-styling styling-grey">
+				<li class="col-9-25"><input type="button" value="PRINT FORM FOR SELECTED"></li>
+				<li class="col-9-25"><input type="button" value="SAVE DATA INTO DATABASE"></li>
+				<li class="col-7-25"><input type="button" value="CANCEL"></li>
+			</ul><!-- forwarding mail END-->
+<!-- dynamic content features END-->
+
+<!-- DYNAMIC DATA CONTENT -->
+			<ul class="flex data-menu-styling styling-blue interaction">
+				<li class="col-1-25"><input type="checkbox"></li>
+				<li class="col-4-25">COMPANY NAME</li>
+				<li class="col-4-25">SENDER NAME</li>
+				<li class="col-6-25">SENDER ADDRESS</li>
+				<li class="col-3-25">DATE</li>
+				<li class="col-3-25">FORW. DATE</li>
+				<li class="col-4-25">FORW. METHOD</li>
+			</ul>
+
+			<ul class="flex data-styling styling-green" id="">
+				<li class="col-1-25"><input type="checkbox"></li>
+				<li class="col-4-25">Sweet Entertainment Kft.</li>
+				<li class="col-4-25">NAV</li>
+				<li class="col-6-25">1387 Budapest, pf.: 45.</li>
+				<li class="col-3-25">2015.04.20</li>
+				<li class="col-3-25">2015.05.02</li>
+				<li class="col-4-25">levél</li>
+			</ul>
+
+			<ul class="flex data-styling styling-yellow" id="">
+				<li class="col-1-25"><input type="checkbox"></li>
+				<li class="col-4-25">Sweet Entertainment Kft.</li>
+				<li class="col-4-25">SBERBANK</li>
+				<li class="col-6-25">1088 Budapest, Rákóczi út 7.</li>
+				<li class="col-3-25">2015.04.20</li>
+				<li class="col-3-25"></li>
+				<li class="col-4-25"></li>
+			</ul>
+
+			<ul class="flex data-styling styling-yellow" id="">
+				<li class="col-1-25"><input type="checkbox"></li>
+				<li class="col-4-25">Sweet Entertainment Kft.</li>
+				<li class="col-4-25">SBERBANK fwwgw</li>
+				<li class="col-6-25">1088 Budapest, Rákóczi út 7. wegwerh wgegw</li>
+				<li class="col-3-25">2015.04.20</li>
+				<li class="col-3-25"></li>
+				<li class="col-4-25"></li>
+			</ul>
+<!-- dynamic data content END -->
+		</div>
+<!-- dynamic content container END -->
+	</div>
+<!-- main container END -->
+</body>
+
+</html>

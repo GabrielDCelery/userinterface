@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+	<meta charset="utf-8">
+</head>
+
+<body>
+
+<!-- MAIN CONTAINER -->
+	<div class="wrapper">
+		
+<!-- MAIN MENU -->
+		<div class="main-menu-container">
+			<ul class="flex main-menu-styling styling-grey interaction">
+				<li>COMPANIES</li>
+				<li>MAILING</li>
+				<li>INVOICES</li>
+			</ul>
+		</div>
+<!-- main menu END -->
+
+<!-- DYNAMIC CONTENT CONTAINER -->
+		<div class="dynamic-content-container">
+<!-- DYNAMIC CONTENT FEATURES -->
+
+			<!-- DYNAMIC CONTENT FEATURES MENU-->
+			<ul class="flex feature-menu-styling styling-blue interaction">
+				<li id="search-mail">SEARCH COMPANY</li>
+				<li id="add-mail">SEND MAIL</li>
+				<li id="add-mail">ADD NEW COMPANY</li>
+				<li id="add-mail">EDIT OR PRINT CONTRACT</li>
+			</ul>
+			<!-- dynamic content features menu END-->
+
+			<!-- SEARCH COMPANY-->
+			<ul class="flex feature-styling styling-grey">
+				<li class="col-5-25"><label for="data-search">COMPANY NAME</label></li>
+				<li class="col-8-25"><label for="starting-date">EXP. DATE INTERVAL</label></li>
+				<li class="col-1-25"><input type="checkbox" id="valid-contract" checked></li>
+				<li class="col-5-25"><label for="valid-contract">VALID CONTRACT</label></li>
+				<li class="col-1-25"><input type="checkbox" id="valid-contract"></li>
+				<li class="col-5-25"><label for="valid-contract">EXP. CONTRACT</label></li>
+				<li class="col-5-25"><input type="text" id="data-search"></li>
+				<li class="col-4-25"><input type="date" id="starting-date"></li>
+				<li class="col-4-25"><input type="date" id="ending-date"></li>
+				<li class="col-1-25"><input type="checkbox" id="valid-contract" checked></li>
+				<li class="col-5-25"><label for="valid-contract">UNIQUE RESULTS</label></li>
+				<li class="col-6-25"><input type="button" value="SEARCH"></li>
+			</ul><!-- search company END-->
+			<!-- SEND MAIL -->
+			<ul class="flex feature-styling styling-grey">
+				<li class="col-15-25">
+					<select>
+						<option>Your contract is about to expire</option>
+						<option>Last warning before terminating contract</option>
+					</select>
+				</li>
+				<li class="col-10-25"><input type="button" value="SEND EMAIL"></li>
+			</ul><!-- send mail END-->
+			<!-- ADD NEW COMPANY -->
+
+			<ul class="flex feature-styling font-size">
+				<li class="col-4-25 styling-grey">COMPANY NAME</li>
+				<li class="col-6-25"><input type="text"></li>
+				<li class="col-4-25 styling-grey">STARTING DATE</li>
+				<li class="col-4-25"><input type="date"></li>
+				<li class="col-3-25 styling-grey">ENDING DATE</li>
+				<li class="col-4-25"><input type="date"></li>
+
+				<li class="col-4-25 styling-grey">PHONE NUMBER</li>
+				<li class="col-6-25"><input type="text"></li>
+				<li class="col-4-25 styling-grey">EMAIL</li>
+				<li class="col-11-25"><input type="email"></li>
+
+				<li class="col-4-25 styling-grey">INVOICE NUMBER</li>
+				<li class="col-6-25"><input type="text"></li>		
+				<li class="col-4-25 styling-grey">SERVICE PROVIDER</li>
+				<li class="col-11-25"><select><option>Zeller és Zeller Kft.</option><option>World Top Sport Bt.</option></select></li>	
+
+				<li class="col-4-25 styling-grey">PRICE OF SERV. (NUM)</li>
+				<li class="col-6-25"><input type="number"></li>		
+				<li class="col-4-25 styling-grey">PRICE OF SERV. (LET)</li>
+				<li class="col-11-25"><input type="text"></li>	
+
+				<li class="col-4-25 styling-grey">COMPANY ADDRESS</li>
+				<li class="col-6-25"><input type="text"></li>	
+				<li class="col-4-25 styling-grey">COMPANY ID</li>
+				<li class="col-4-25"><input type="text"></li>		
+				<li class="col-3-25 styling-grey">TAX ID</li>
+				<li class="col-4-25"><input type="text"></li>	
+
+				<li class="col-4-25 styling-grey">POSTAL NUMBER</li>
+				<li class="col-6-25"><input type="text"></li>
+				<li class="col-4-25 styling-grey">POSTAL SERVICE</li>
+				<li class="col-11-25"><select><option>yes</option><option>no</option></select></li>
+
+				<li class="col-4-25 styling-grey">POSTAL NAME</li>
+				<li class="col-6-25"><input type="text"></li>		
+				<li class="col-4-25 styling-grey">POSTAL ADDRESS</li>
+				<li class="col-11-25"><input type="text"></li>	
+
+				<li class="col-4-25 styling-grey">MANAGER NAME</li>
+				<li class="col-6-25"><input type="text"></li>	
+				<li class="col-4-25 styling-grey">MANAG. STATUS</li>
+				<li class="col-4-25"><select><option>manager</option><option>commissioned</option></select></li>
+				<li class="col-3-25 styling-grey">MANAG. ID</li>
+				<li class="col-4-25"><input type="text"></li>
+
+				<li class="col-4-25 styling-grey">MAN. MOTHER'S NAME</li>
+				<li class="col-6-25"><input type="text"></li>		
+				<li class="col-4-25 styling-grey">MANAGER ADDRESS</li>
+				<li class="col-11-25"><input type="text"></li>
+
+				<li class="col-4-25 styling-grey">DOCUMENTS HOLDER</li>
+				<li class="col-6-25"><input type="text"></li>		
+				<li class="col-4-25 styling-grey">DOCUMENTS ADDRESS</li>
+				<li class="col-11-25"><input type="text"></li>
+
+			</ul>
+
+			<ul class="flex feature-styling styling-grey">
+				<li class="col-10-25"><input type="button" value="CANCEL"></li>
+				<li class="col-15-25"><input type="button" value="SAVE AND PRINT"></li>
+			</ul><!-- add new company END -->
+
+			<!-- EDIT SELECTED-->
+			<ul class="flex feature-styling styling-grey">
+				<li class="col-25-25"><input type="button" value="SHOW DETAILED INFO OF SELECTED"></li>
+			</ul><!-- edit selected END -->
+
+
+
+<!-- dynamic content features END-->
+
+<!-- DYNAMIC DATA CONTENT -->
+			<ul class="flex data-menu-styling styling-blue interaction">
+				<li class="col-1-25"><input type="checkbox"></li>
+				<li class="col-2-25">ID</li>
+				<li class="col-5-25">COMPANY NAME</li>
+				<li class="col-6-25">EMAIL</li>
+				<li class="col-5-25">PHONE NUM.</li>
+				<li class="col-3-25">POSTAL NUM.</li>
+				<li class="col-3-25">EXP. DATE</li>
+			</ul>
+
+			<ul class="flex data-styling styling-green" id="">
+				<li class="col-1-25"><input type="checkbox"></li>
+				<li class="col-2-25">1314</li>
+				<li class="col-5-25">Zeller és Zeller Kft.</li>
+				<li class="col-6-25">gaborzeller@gmail.com</li>
+				<li class="col-5-25">06-70/777-51-76</li>
+				<li class="col-3-25">6110/64/2013</li>
+				<li class="col-3-25">2015.05.21</li>
+			</ul>
+
+			<ul class="flex data-styling styling-yellow" id="">
+				<li class="col-1-25"><input type="checkbox"></li>
+				<li class="col-2-25">1314</li>
+				<li class="col-5-25">Zeller és Zeller Kft.</li>
+				<li class="col-6-25">gaborzeller@gmail.com</li>
+				<li class="col-5-25">06-70/777-51-76</li>
+				<li class="col-3-25">6110/64/2013</li>
+				<li class="col-3-25">2015.05.21</li>
+			</ul>
+
+			<ul class="flex data-styling styling-red" id="">
+				<li class="col-1-25"><input type="checkbox"></li>
+				<li class="col-2-25">1314</li>
+				<li class="col-5-25">Zeller és Zeller Kft.</li>
+				<li class="col-6-25">gaborzeller@gmail.com</li>
+				<li class="col-5-25">06-70/777-51-76</li>
+				<li class="col-3-25">6110/64/2013</li>
+				<li class="col-3-25">2015.05.21</li>
+			</ul>
+
+			<!-- EDIT COPANY AND PRINT CONTRACT -->
+			<ul class="flex feature-styling styling-grey">
+				<li class="col-6-25"><input type="button" value="EDIT SELECTED"></li>
+				<li class="col-8-25"><input type="button" value="SAVE INTO DATABASE"></li>
+				<li class="col-5-25"><input type="button" value="CANCEL"></li>
+				<li class="col-6-25"><input type="button" value="PRINT CONTRACT"></li>
+			</ul><!-- edit company and print contract -->
+
+			<ul class="flex feature-styling font-size" id="">
+				<li class="col-1-25 styling-green"><input type="radio" name="id_number_of_detailed"></li>
+				<li class="col-3-25 styling-green">COMPANY NAME</li>
+				<li class="col-6-25">Zeller és Zeller Kft.</li>
+				<li class="col-4-25 styling-green">STARTING DATE</li>
+				<li class="col-4-25">2015.04.21</li>
+				<li class="col-3-25 styling-green">ENDING DATE</li>
+				<li class="col-4-25">2015.10.21</li>
+
+				<li class="col-4-25 styling-green">PHONE NUMBER</li>
+				<li class="col-6-25">06-70/777-51-76</li>
+				<li class="col-4-25 styling-green">EMAIL</li>
+				<li class="col-11-25">gaborzeller@gmail.com</li>
+
+				<li class="col-4-25 styling-green">INVOICE NUMBER</li>
+				<li class="col-6-25">DQ3SA4099228</li>		
+				<li class="col-4-25 styling-green">SERVICE PROVIDER</li>
+				<li class="col-11-25">World Top Sport Bt.</li>	
+
+				<li class="col-4-25 styling-green">PRICE OF SERV. (NUM)</li>
+				<li class="col-6-25">32940</li>		
+				<li class="col-4-25 styling-green">PRICE OF SERV. (LET)</li>
+				<li class="col-11-25">Harminckettőezerkilencszáznegyven</li>	
+				
+				<li class="col-4-25 styling-green">TRANSFER DATE</li>
+				<li class="col-6-25">2015-02-04</li>		
+				<li class="col-4-25 styling-green">INVOICE DATE</li>
+				<li class="col-11-25">2015-02-06</li>
+
+				<li class="col-4-25 styling-green">PAYMENT METH.</li>
+				<li class="col-6-25">money transfer</li>		
+				<li class="col-4-25 styling-green">ACCOUNT NUM.</li>
+				<li class="col-11-25">14100206-11366349-01000006</li>		
+
+				<li class="col-4-25 styling-green">COMPANY ADDRESS</li>
+				<li class="col-6-25">1035 Budapest, Miklós u. 13. VIII/42.</li>	
+				<li class="col-4-25 styling-green">COMPANY ID</li>
+				<li class="col-4-25">01-09-203806</li>		
+				<li class="col-3-25 styling-green">TAX ID</li>
+				<li class="col-4-25">25168635-2-41</li>	
+
+				<li class="col-4-25 styling-green">POSTAL NUMBER</li>
+				<li class="col-6-25">6110/532/2011</li>
+				<li class="col-4-25 styling-green">POSTAL SERVICE</li>
+				<li class="col-11-25">yes</li>
+
+				<li class="col-4-25 styling-green">POSTAL NAME</li>
+				<li class="col-6-25">Zeller Gábor</li>		
+				<li class="col-4-25 styling-green">POSTAL ADDRESS</li>
+				<li class="col-11-25">1035 Budapest, Miklós u. 13. VIII/42.</li>	
+
+				<li class="col-4-25 styling-green">MANAGER NAME</li>
+				<li class="col-6-25">Zeller Gábor</li>	
+				<li class="col-4-25 styling-green">MAN. STATUS</li>
+				<li class="col-4-25">ügyvezető</li>
+				<li class="col-3-25 styling-green">MAN. ID</li>
+				<li class="col-4-25">615912KA</li>
+
+				<li class="col-4-25 styling-green">MAN. MOTHER'S NAME</li>
+				<li class="col-6-25">Zeller Ildikó Anna</li>		
+				<li class="col-4-25 styling-green">MANAGER ADDRESS</li>
+				<li class="col-11-25">1035 Budapest, Miklós u. 13. VIII/42.</li>
+
+				<li class="col-4-25 styling-green">DOCUMENTS HOLDER</li>
+				<li class="col-6-25">Zeller Gábor</li>		
+				<li class="col-4-25 styling-green">DOCUMENTS ADDRESS</li>
+				<li class="col-11-25">1035 Budapest, Miklós u. 13. VIII/42.</li>	
+			</ul>
+
+
+			<ul class="flex feature-styling font-size" id="">
+				<li class="col-1-25 styling-red"><input type="radio" name="id_number_of_detailed"></li>
+				<li class="col-3-25 styling-red">COMPANY NAME</li>
+				<li class="col-6-25">Zeller és Zeller Kft.</li>
+				<li class="col-4-25 styling-red">STARTING DATE</li>
+				<li class="col-4-25">2015.04.21</li>
+				<li class="col-3-25 styling-red">ENDING DATE</li>
+				<li class="col-4-25">2015.10.21</li>
+
+				<li class="col-4-25 styling-red">PHONE NUMBER</li>
+				<li class="col-6-25">06-70/777-51-76</li>
+				<li class="col-4-25 styling-red">EMAIL</li>
+				<li class="col-11-25">gaborzeller@gmail.com</li>
+
+				<li class="col-4-25 styling-red">INVOICE NUMBER</li>
+				<li class="col-6-25">DQ3SA4099228</li>		
+				<li class="col-4-25 styling-red">SERVICE PROVIDER</li>
+				<li class="col-11-25">World Top Sport Bt.</li>	
+
+				<li class="col-4-25 styling-red">PRICE OF SERV. (NUM)</li>
+				<li class="col-6-25">32940</li>		
+				<li class="col-4-25 styling-red">PRICE OF SERV. (LET)</li>
+				<li class="col-11-25">Harminckettőezerkilencszáznegyven</li>	
+
+				<li class="col-4-25 styling-red">TRANSFER DATE</li>
+				<li class="col-6-25">2015-02-04</li>		
+				<li class="col-4-25 styling-red">INVOICE DATE</li>
+				<li class="col-11-25">2015-02-06</li>
+
+				<li class="col-4-25 styling-red">PAYMENT METH.</li>
+				<li class="col-6-25">money transfer</li>		
+				<li class="col-4-25 styling-red">ACCOUNT NUM.</li>
+				<li class="col-11-25">14100206-11366349-01000006</li>	
+
+				<li class="col-4-25 styling-red">COMPANY ADDRESS</li>
+				<li class="col-6-25">1035 Budapest, Miklós u. 13. VIII/42.</li>	
+				<li class="col-4-25 styling-red">COMPANY ID</li>
+				<li class="col-4-25">01-09-203806</li>		
+				<li class="col-3-25 styling-red">TAX ID</li>
+				<li class="col-4-25">25168635-2-41</li>	
+
+				<li class="col-4-25 styling-red">POSTAL NUMBER</li>
+				<li class="col-6-25">6110/532/2011</li>
+				<li class="col-4-25 styling-red">POSTAL SERVICE</li>
+				<li class="col-11-25">yes</li>
+
+				<li class="col-4-25 styling-red">POSTAL NAME</li>
+				<li class="col-6-25">Zeller Gábor</li>		
+				<li class="col-4-25 styling-red">POSTAL ADDRESS</li>
+				<li class="col-11-25">1035 Budapest, Miklós u. 13. VIII/42.</li>	
+
+				<li class="col-4-25 styling-red">MANAGER NAME</li>
+				<li class="col-6-25">Zeller Gábor</li>	
+				<li class="col-4-25 styling-red">MAN. STATUS</li>
+				<li class="col-4-25">ügyvezető</li>
+				<li class="col-3-25 styling-red">MAN. ID</li>
+				<li class="col-4-25">615912KA</li>
+
+				<li class="col-4-25 styling-red">MAN. MOTHER'S NAME</li>
+				<li class="col-6-25">Zeller Ildikó Anna</li>		
+				<li class="col-4-25 styling-red">MANAGER ADDRESS</li>
+				<li class="col-11-25">1035 Budapest, Miklós u. 13. VIII/42.</li>
+
+				<li class="col-4-25 styling-red">DOCUMENTS HOLDER</li>
+				<li class="col-6-25">Zeller Gábor</li>		
+				<li class="col-4-25 styling-red">DOCUMENTS ADDRESS</li>
+				<li class="col-11-25">1035 Budapest, Miklós u. 13. VIII/42.</li>	
+			</ul>
+
+<!-- dynamic data content END -->
+		</div>
+<!-- dynamic content container END -->
+	</div>
+<!-- main container END -->
+</body>
+
+
+</html>

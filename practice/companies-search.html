@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+	<meta charset="utf-8">
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.min.js"></script>
+	 <script src="features/searchforcompany/searchforname.js"></script>
+</head>
+
+<body ng-app="myApp">
+
+<!-- MAIN CONTAINER -->
+	<div class="wrapper">
+
+<!-- DYNAMIC CONTENT CONTAINER -->
+		<div class="dynamic-content-container" ng-controller="searchAndListCompanies">
+<!-- DYNAMIC CONTENT FEATURES -->
+			<!-- SEARCH COMPANY-->
+			<ul class="flex feature-styling styling-grey">
+				<li class="col-5-25">
+					<label for="data-search">COMPANY NAME</label>
+				</li>
+				<li class="col-8-25">
+					<label for="starting-date">EXP. DATE INTERVAL</label>
+				</li>
+				<li class="col-1-25">
+					<input type="checkbox" ng-model="formData.validContract">
+				</li>
+				<li class="col-5-25">
+					<label for="valid-contract">VALID CONTRACT</label>
+				</li>
+				<li class="col-1-25">
+					<input type="checkbox" ng-model="formData.expiredContract">
+				</li>
+				<li class="col-5-25">
+					<label for="valid-contract">EXP. CONTRACT</label>
+				</li>
+				<li class="col-5-25">
+					<input type="text" ng-model="formData.searchName" ng-keyup="searchForname()">
+				</li>
+				<li class="col-4-25">
+					<input type="date" ng-model="formData.startingDate">
+				</li>
+				<li class="col-4-25">
+					<input type="date" ng-model="formData.endingDate">
+				</li>
+				<li class="col-1-25">
+					<input type="checkbox" ng-model="formData.uniqueResults" checked>
+				</li>
+				<li class="col-5-25">
+					<label for="valid-contract">UNIQUE RESULTS</label>
+				</li>
+				<li class="col-6-25">
+					<input type="button" value="SEARCH" ng-click="sendForm()">
+				</li>
+
+       			<ul>
+       				<li ng-repeat="companyName in searchResults" ng-click="clicked(companyName)">{{companyName}}</li>
+       			</ul>
+			</ul><!-- search company END-->
+<!-- dynamic content features END-->
+
+<!-- DYNAMIC DATA CONTENT -->
+			<ul class="flex data-menu-styling styling-blue interaction">
+				<li class="col-1-25"><input type="checkbox"></li>
+				<li class="col-2-25" ng-click = "sortField = 'company_id'">ID</li>
+				<li class="col-5-25" ng-click = "sortField = 'company_name'">COMPANY NAME</li>
+				<li class="col-6-25" ng-click = "sortField = 'company_email'">EMAIL</li>
+				<li class="col-5-25" ng-click = "sortField = 'company_phone'">PHONE NUM.</li>
+				<li class="col-3-25" ng-click = "sortField = 'postal_number'">POSTAL NUM.</li>
+				<li class="col-3-25" ng-click = "sortField = 'ending_date'">EXP. DATE</li>
+			</ul>
+
+			<ul class="flex data-styling styling-green" ng-repeat="company in companies | orderBy:sortField">
+				<li class="col-1-25"><input type="checkbox" id="{{company.company_id}}"></li>
+				<li class="col-2-25">{{company.company_id}}</li>
+				<li class="col-5-25">{{company.company_name}}</li>
+				<li class="col-6-25">{{company.company_email}}</li>
+				<li class="col-5-25">{{company.company_phone}}</li>
+				<li class="col-3-25">{{company.postal_number}}</li>
+				<li class="col-3-25">{{company.ending_date}}</li>
+			</ul>
+
+<!-- dynamic data content END -->
+		</div>
+<!-- dynamic content container END -->
+	</div>
+<!-- main container END -->
+</body>
+
+
+</html>
