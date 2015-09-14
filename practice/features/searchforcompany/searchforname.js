@@ -1,7 +1,12 @@
 
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ["checklist-model"]);
 
 app.controller('searchAndListCompanies', ['$scope', '$http', function($scope, $http){
+
+/********
+Google-like search in an input field
+********/
+
 	$http.get('features/searchforcompany/searchforname.php').success(function(data){
 		$scope.names = data;
 	})
@@ -26,21 +31,68 @@ app.controller('searchAndListCompanies', ['$scope', '$http', function($scope, $h
 		}
 	};
 
+/********
+Insert the selected name into the input field
+********/
+
 	$scope.clicked = function (companyName){
 		$scope.formData.searchName = companyName;
 		$scope.searchResults = [];
 	};
 
+/********
+List the items according to search properties
+********/
+
 	$scope.sendForm = function(){
+
 		var request = $http({
 			method: 'POST',
 			url: 'features/searchforcompany/listnames.php',
 			data: $scope.formData
 		})
 		request.success(function(data){
-			console.log(data)
 			$scope.companies = data;
 		})
 		$scope.sortField = "company_name";
+		$scope.selectedCompanies = {
+			id: [],
+			allChecked: false
+		}
 	}
+
+/********
+Checklist model
+********/
+
+
+	$scope.checkAll = function (){
+		if ($scope.selectedCompanies.allChecked == false){
+			/*$scope.selectedCompanies.id = $scope.companies.map(function(item){return item.company_id})*/
+			angular.forEach($scope.companies, function(item){
+				$scope.selectedCompanies.id.push(item.company_id)
+			})
+			$scope.selectedCompanies.allChecked = true;
+		} else {
+			$scope.selectedCompanies.id = [];
+			$scope.selectedCompanies.allChecked = false;
+		}
+	}
+
+/********
+Get detailed info of selected companies
+********/
+
+	$scope.getDetailedInfo = function (){
+		var request = $http({
+			method: 'POST',
+			url: 'features/searchforcompany/listdetailedinfo.php',
+			data: $scope.selectedCompanies
+		})
+		request.success(function(data){
+			console.log(data)
+			$scope.companiesDetailed = data;
+		})
+	}
+
 }]);

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="../css/normalize.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<meta charset="utf-8">
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.min.js"></script>
+	 <script src="../modules/checklist-model-0.5.0/checklist-model.js"></script>
+	 <script>
+		var app = angular.module("myApp", ["checklist-model"]);
+		app.controller('Ctrl1', function($scope, $http) {
+
+		$scope.getData = function (){
+			$http.get('phpcall.php').success(function(data){
+				$scope.roles = [];
+				for(var i = 0; i < data.length; i++){
+					$scope.roles.push(data[i])
+				}
+			})
+
+		}
+/*
+		  $scope.roles = [
+		    'guest', 
+		    'user', 
+		    'customer', 
+		    'admin'
+		  ];
+*/
+		$scope.user = {
+			role: []
+		};
+
+		$scope.checkArray = function (){
+			console.log($scope.user.role);
+		}
+
+/*
+		  $scope.checkAll = function() {
+		    $scope.user.roles = angular.copy($scope.roles);
+		  };
+		  $scope.uncheckAll = function() {
+		    $scope.user.roles = [];
+		  };
+		  $scope.checkFirst = function() {
+		    $scope.user.roles.splice(0, $scope.user.roles.length); 
+		    $scope.user.roles.push('guest');
+		  };
+*/
+
+		});
+	 </script>
+</head>
+
+<body ng-app="myApp">
+	<div ng-controller="Ctrl1">
+		<button ng-click="getData()">get data</button>
+		<label ng-repeat="role in roles">
+		  <input type="checkbox" checklist-model="user.role" checklist-value="role.role"> {{role.role}}
+		</label>
+		<button ng-click="checkArray()">check array</button>
+	</div>
+</body>
+
+
+</html>
