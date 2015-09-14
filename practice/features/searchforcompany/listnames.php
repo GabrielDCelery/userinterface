@@ -33,6 +33,27 @@ $q .= ' postal_number
 
 if ($company_name !== ""){
 	$q .= ' WHERE company_name = "' . $company_name . '"';
+} else {
+	$q .= ' WHERE 1';
+}
+
+if ($starting_date !== null){
+	$q .= ' AND ending_date >= "' . $starting_date . '" ';
+}
+
+if ($ending_date !== null){
+	$q .= ' AND ending_date <= "' . $ending_date . '" ';
+	/*$q .= ' AND "' . $ending_date . '" >= ending_date ';*/
+}
+
+if ($valid_contract == true && $expired_contract == true){
+	$q .= ' AND companies.status = true OR companies.status = false';
+} elseif ($valid_contract == true && $expired_contract == false){
+	$q .= ' AND companies.status = true ';
+} elseif ($valid_contract == false && $expired_contract == true){
+	$q .= ' AND companies.status = false ';	
+} else {
+	$q .= ' AND companies.status = true AND companies.status = false';	
 }
 
 if ($unique_results == true){

@@ -67,21 +67,21 @@
 <!-- DYNAMIC DATA CONTENT -->
 			<ul class="flex data-menu-styling styling-blue interaction">
 				<li class="col-1-25"><input type="checkbox" ng-click="checkAll()"></li>
-				<li class="col-2-25" ng-click = "sortField = 'company_id'">ID</li>
 				<li class="col-5-25" ng-click = "sortField = 'company_name'">COMPANY NAME</li>
 				<li class="col-6-25" ng-click = "sortField = 'company_email'">EMAIL</li>
-				<li class="col-5-25" ng-click = "sortField = 'company_phone'">PHONE NUM.</li>
-				<li class="col-3-25" ng-click = "sortField = 'postal_number'">POSTAL NUM.</li>
+				<li class="col-4-25" ng-click = "sortField = 'company_phone'">PHONE NUM.</li>
+				<li class="col-3-25" ng-click = "sortField = 'company_phone'">POSTAL NUM.</li>
+				<li class="col-3-25" ng-click = "sortField = 'postal_number'">START DATE</li>
 				<li class="col-3-25" ng-click = "sortField = 'ending_date'">EXP. DATE</li>
 			</ul>
 
 			<ul class="flex data-styling styling-green" ng-repeat="company in companies | orderBy:sortField">
 				<li class="col-1-25"><input type="checkbox" checklist-model="selectedCompanies.id" checklist-value="company.company_id"></li>
-				<li class="col-2-25">{{company.company_id}}</li>
 				<li class="col-5-25">{{company.company_name}}</li>
 				<li class="col-6-25">{{company.company_email}}</li>
-				<li class="col-5-25">{{company.company_phone}}</li>
+				<li class="col-4-25">{{company.company_phone}}</li>
 				<li class="col-3-25">{{company.postal_number}}</li>
+				<li class="col-3-25">{{company.starting_date}}</li>
 				<li class="col-3-25">{{company.ending_date}}</li>
 			</ul>
 
