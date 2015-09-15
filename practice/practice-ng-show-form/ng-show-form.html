@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.min.js"></script>
+	<script src="../modules/checklist-model-0.5.0/checklist-model.js"></script>
+	<script>
+		var app = angular.module("myApp", []);
+		app.controller('Ctrl1', function($scope) {
+
+			$scope.userList = [
+				{
+					name: "Gabriel",
+					age: 32
+				},
+				{
+					name: "Lilly",
+					age:27
+				}
+			];
+
+			$scope.masterFile = angular.copy($scope.userList);
+
+			$scope.sendForm = function(data){
+				console.log(data)
+			}
+
+			$scope.cancelForm = function(){
+				$scope.userList = $scope.masterFile;
+			}
+
+		});
+	</script>
+</head>
+
+<body ng-app="myApp">
+
+	<div ng-controller="Ctrl1">
+		<ul ng-repeat="user in userList">
+			<li>
+				<div ng-hide="showForm">{{user.name}}</div>
+				<input type="text" ng-model="user.name" ng-show="showForm">
+			</li>
+			<li>
+				<div ng-hide="showForm">{{user.age}}</div>
+				<input type="text" ng-model="user.age" ng-show="showForm">
+			</li>
+			<button ng-click="showForm = !showForm">Show list</button>
+			<button ng-click="sendForm(user)">Send form</button>
+			<button ng-click="cancelForm()">Cancel form</button>
+		</ul>
+	</div>
+</body>
+
+
+</html>
