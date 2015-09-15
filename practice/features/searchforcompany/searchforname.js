@@ -53,6 +53,16 @@ List the items according to search properties
 		})
 		request.success(function(data){
 			$scope.companies = data;
+			/*Adding css properties to the fetched data*/
+			$scope.companies.map(function(obj){
+				if (obj.contract_status == true && obj.postal_number != null){
+					obj.css_color = "green";
+				} else if (obj.contract_status == true && obj.postal_number == null){
+					obj.css_color = "yellow";
+				} else {
+					obj.css_color = "red";
+				}
+			})
 		})
 		$scope.sortField = "company_name";
 		$scope.selectedCompanies = {

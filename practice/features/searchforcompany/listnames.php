@@ -15,7 +15,7 @@ $pdo = new PDO('mysql:dbname=practice_companies;host=localhost', 'root', null, a
 $q = 'SELECT
 	companies_detailed.id AS company_id,
 	company_name,
-	status,
+	contract_status,
 	company_email,
 	company_phone,
 	starting_date,';
@@ -47,13 +47,13 @@ if ($ending_date !== null){
 }
 
 if ($valid_contract == true && $expired_contract == true){
-	$q .= ' AND companies.status = true OR companies.status = false';
+	$q .= ' AND companies.contract_status = true OR companies.contract_status = false';
 } elseif ($valid_contract == true && $expired_contract == false){
-	$q .= ' AND companies.status = true ';
+	$q .= ' AND companies.contract_status = true ';
 } elseif ($valid_contract == false && $expired_contract == true){
-	$q .= ' AND companies.status = false ';	
+	$q .= ' AND companies.contract_status = false ';	
 } else {
-	$q .= ' AND companies.status = true AND companies.status = false';	
+	$q .= ' AND companies.contract_status = true AND companies.contract_status = false';	
 }
 
 if ($unique_results == true){

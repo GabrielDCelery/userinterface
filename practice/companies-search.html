@@ -65,17 +65,22 @@
 <!-- dynamic content features END-->
 
 <!-- DYNAMIC DATA CONTENT -->
+
+			<!-- COMPANY SHORTLIST MENU -->
 			<ul class="flex data-menu-styling styling-blue interaction">
-				<li class="col-1-25"><input type="checkbox" ng-click="checkAll()"></li>
+				<li class="col-1-25">
+					<input type="checkbox" ng-click="checkAll()">
+				</li>
 				<li class="col-5-25" ng-click = "sortField = 'company_name'">COMPANY NAME</li>
 				<li class="col-6-25" ng-click = "sortField = 'company_email'">EMAIL</li>
 				<li class="col-4-25" ng-click = "sortField = 'company_phone'">PHONE NUM.</li>
 				<li class="col-3-25" ng-click = "sortField = 'company_phone'">POSTAL NUM.</li>
 				<li class="col-3-25" ng-click = "sortField = 'postal_number'">START DATE</li>
 				<li class="col-3-25" ng-click = "sortField = 'ending_date'">EXP. DATE</li>
-			</ul>
+			</ul><!-- company shortlist menu END-->
 
-			<ul class="flex data-styling styling-green" ng-repeat="company in companies | orderBy:sortField">
+			<!-- COMPANY SHORTLIST -->
+			<ul class="flex data-styling" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[company.css_color]" ng-repeat="company in companies | orderBy:sortField">
 				<li class="col-1-25"><input type="checkbox" checklist-model="selectedCompanies.id" checklist-value="company.company_id"></li>
 				<li class="col-5-25">{{company.company_name}}</li>
 				<li class="col-6-25">{{company.company_email}}</li>
@@ -83,13 +88,14 @@
 				<li class="col-3-25">{{company.postal_number}}</li>
 				<li class="col-3-25">{{company.starting_date}}</li>
 				<li class="col-3-25">{{company.ending_date}}</li>
-			</ul>
+			</ul><!-- company shortlist END-->
 
-			<!-- SHOW DETAILED-->
+			<!-- SHOW DETAILED MENU-->
 			<ul class="flex feature-styling styling-grey">
 				<li class="col-25-25"><input type="button" value="SHOW DETAILED INFO OF SELECTED" ng-click="getDetailedInfo()"></li>
-			</ul><!-- show detailed END -->
+			</ul><!-- show detailed menu END -->
 
+			<!-- SHOW DETAILED COMPANY INFORMATIONS -->
 			<ul class="flex feature-styling font-size" ng-repeat="companyDetailed in companiesDetailed">
 				<li class="col-1-25 styling-green"><input type="radio"></li>
 				<li class="col-3-25 styling-green">COMPANY NAME</li>
@@ -158,6 +164,7 @@
 				<li class="col-4-25 styling-green">DOCUMENTS ADDRESS</li>
 				<li class="col-11-25">{{companyDetailed.document_holder_address}}</li>	
 			</ul>
+			<!-- show detailed company informations END -->
 
 			<!-- EDIT COPANY AND PRINT CONTRACT -->
 			<ul class="flex feature-styling styling-grey">
