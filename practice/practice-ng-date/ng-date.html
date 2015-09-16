@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.min.js"></script>
+	<script>
+		var myApp = angular.module('dateInputExample', []);
+		myApp.controller('DateController', ['$scope', '$http', function($scope, $http){
+
+			$http.get('getdate.php').success(function(data){
+				$scope.date = data;
+				console.log($scope.convertToDate($scope.date[0].starting_date))
+
+				$scope.example = {
+					value: $scope.convertToDate($scope.date[0].starting_date)
+				};
+			})
+
+			$scope.convertToDate = function (stringDate){
+				var dateOut = new Date(stringDate);
+				return dateOut;
+			};
+
+		}]);
+	</script>
+</head>
+
+<body ng-app="dateInputExample">
+
+	<form name="myForm" ng-controller="DateController as dateCtrl">
+	   <label for="exampleInput">Pick a date in 2013:</label>
+	   <input type="date" id="exampleInput" name="input" ng-model="example.value"
+	       placeholder="yyyy-MM-dd" min="2013-01-01" max="2013-12-31" required />
+	   <div role="alert">
+	     <span class="error" ng-show="myForm.input.$error.required">
+	         Required!</span>
+	     <span class="error" ng-show="myForm.input.$error.date">
+	         Not a valid date!</span>
+	    </div>
+	    <tt>value = {{example.value | date: "yyyy-MM-dd"}}</tt><br/>
+	    <tt>myForm.input.$valid = {{myForm.input.$valid}}</tt><br/>
+	    <tt>myForm.input.$error = {{myForm.input.$error}}</tt><br/>
+	    <tt>myForm.$valid = {{myForm.$valid}}</tt><br/>
+	    <tt>myForm.$error.required = {{!!myForm.$error.required}}</tt><br/>
+	</form>
+</body>
+
+
+</html>

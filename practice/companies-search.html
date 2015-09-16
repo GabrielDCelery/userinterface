@@ -91,89 +91,224 @@
 			</ul><!-- company shortlist END-->
 
 			<!-- SHOW DETAILED MENU-->
-			<ul class="flex feature-styling styling-grey">
-				<li class="col-25-25"><input type="button" value="SHOW DETAILED INFO OF SELECTED" ng-click="getDetailedInfo()"></li>
-			</ul><!-- show detailed menu END -->
+				<ul class="flex feature-styling styling-grey">
+					<li class="col-25-25"><input type="button" value="SHOW DETAILED INFO OF SELECTED" ng-click="getDetailedInfo()"></li>
+				</ul><!-- show detailed menu END -->
 
 			<!-- SHOW DETAILED COMPANY INFORMATIONS -->
-			<ul class="flex feature-styling font-size" ng-repeat="companyDetailed in companiesDetailed">
-				<li class="col-1-25 styling-green"><input type="radio"></li>
-				<li class="col-3-25 styling-green">COMPANY NAME</li>
-				<li class="col-6-25">{{companyDetailed.company_name}}</li>
-				<li class="col-4-25 styling-green">STARTING DATE</li>
-				<li class="col-4-25">{{companyDetailed.starting_date}}</li>
-				<li class="col-3-25 styling-green">ENDING DATE</li>
-				<li class="col-4-25">{{companyDetailed.ending_date}}</li>
+			<div ng-repeat="companyDetailed in companiesDetailed | orderBy:sortField">
+				<ul class="flex feature-styling font-size">
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						COMPANY NAME
+					</li>
+					<li class="col-6-25">
+						<div ng-hide="showForm">{{companyDetailed.company_name}}</div>
+						<input type="text" ng-model="companyDetailed.company_name" ng-show="showForm">
+					</li>
+					<li class="col-4-25"  ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						STARTING DATE
+					</li>
+					<li class="col-4-25">
+						<div ng-hide="showForm">{{companyDetailed.starting_date | date: "yyyy-MM-dd"}}</div>
+						<input type="date" ng-model="companyDetailed.starting_date" ng-show="showForm">
+					</li>
+					<li class="col-3-25"  ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						ENDING DATE
+					</li>
+					<li class="col-4-25">
+						<div ng-hide="showForm">{{companyDetailed.ending_date | date: "yyyy-MM-dd"}}</div>
+						<input type="date" ng-model="companyDetailed.ending_date" ng-show="showForm">
+					</li>
 
-				<li class="col-4-25 styling-green">PHONE NUMBER</li>
-				<li class="col-6-25">{{companyDetailed.company_phone}}</li>
-				<li class="col-4-25 styling-green">EMAIL</li>
-				<li class="col-11-25">{{companyDetailed.company_email}}</li>
+					<li class="col-4-25"  ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						PHONE NUMBER
+					</li>
+					<li class="col-6-25">
+						<div ng-hide="showForm">{{companyDetailed.company_phone}}</div>
+						<input type="text" ng-model="companyDetailed.company_phone" ng-show="showForm">
+					</li>
+					<li class="col-4-25"  ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						EMAIL
+					</li>
+					<li class="col-11-25">
+						<div ng-hide="showForm">{{companyDetailed.company_email}}</div>
+						<input type="text" ng-model="companyDetailed.company_email" ng-show="showForm">
+					</li>
 
-				<li class="col-4-25 styling-green">INVOICE NUMBER</li>
-				<li class="col-6-25">{{companyDetailed.invoice_number}}</li>		
-				<li class="col-4-25 styling-green">SERVICE PROVIDER</li>
-				<li class="col-11-25">{{companyDetailed.service_provider}}</li>	
+					<li class="col-4-25"  ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						INVOICE NUMBER
+					</li>
+					<li class="col-6-25">
+						<div ng-hide="showForm">{{companyDetailed.invoice_number}}</div>
+						<input type="text" ng-model="companyDetailed.invoice_number" ng-show="showForm">
+					</li>		
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						SERVICE PROVIDER
+					</li>
+					<li class="col-11-25">
+						<div ng-hide="showForm">{{companyDetailed.service_provider}}</div>
+						<input type="text" ng-model="companyDetailed.service_provider" ng-show="showForm">
+					</li>	
 
-				<li class="col-4-25 styling-green">PRICE OF SERV. (NUM)</li>
-				<li class="col-6-25">{{companyDetailed.price_of_serv_num}}</li>		
-				<li class="col-4-25 styling-green">PRICE OF SERV. (LET)</li>
-				<li class="col-11-25">{{companyDetailed.price_of_serv_let}}</li>	
-				
-				<li class="col-4-25 styling-green">TRANSFER DATE</li>
-				<li class="col-6-25">{{companyDetailed.transfer_date}}</li>		
-				<li class="col-4-25 styling-green">INVOICE DATE</li>
-				<li class="col-11-25">{{companyDetailed.invoice_date}}</li>
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						PRICE OF SERV. (NUM)
+					</li>
+					<li class="col-6-25">
+						<div ng-hide="showForm">{{companyDetailed.price_of_serv_num}}</div>
+						<input type="text" ng-model="companyDetailed.price_of_serv_num" ng-show="showForm">
+					</li>		
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						PRICE OF SERV. (LET)
+					</li>
+					<li class="col-11-25">
+						<div ng-hide="showForm">{{companyDetailed.price_of_serv_let}}</div>
+						<input type="text" ng-model="companyDetailed.price_of_serv_let" ng-show="showForm">
+					</li>	
+					
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						TRANSFER DATE
+					</li>
+					<li class="col-6-25">
+						<div ng-hide="showForm">{{companyDetailed.transfer_date}}</div>
+						<input type="date" ng-model="companyDetailed.transfer_date" ng-show="showForm">
+					</li>		
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						INVOICE DATE
+					</li>
+					<li class="col-11-25">
+						<div ng-hide="showForm">{{companyDetailed.invoice_date}}</div>
+						<input type="date" ng-model="companyDetailed.invoice_date" ng-show="showForm">
+					</li>
 
-				<li class="col-4-25 styling-green">PAYMENT METH.</li>
-				<li class="col-6-25">{{companyDetailed.payment_method}}</li>		
-				<li class="col-4-25 styling-green">ACCOUNT NUM.</li>
-				<li class="col-11-25">{{companyDetailed.account_number}}</li>		
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						PAYMENT METH.
+					</li>
+					<li class="col-6-25">
+						<div ng-hide="showForm">{{companyDetailed.payment_method}}</div>
+						<input type="text" ng-model="companyDetailed.payment_method" ng-show="showForm">
+					</li>		
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						ACCOUNT NUM.
+					</li>
+					<li class="col-11-25">
+						<div ng-hide="showForm">{{companyDetailed.account_number}}</div>
+						<input type="text" ng-model="companyDetailed.account_number" ng-show="showForm">
+					</li>		
 
-				<li class="col-4-25 styling-green">COMPANY ADDRESS</li>
-				<li class="col-6-25">{{companyDetailed.company_address}}</li>	
-				<li class="col-4-25 styling-green">COMPANY ID</li>
-				<li class="col-4-25">{{companyDetailed.company_register_id}}</li>		
-				<li class="col-3-25 styling-green">TAX ID</li>
-				<li class="col-4-25">{{companyDetailed.company_tax_id}}</li>	
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						COMPANY ADDRESS
+					</li>
+					<li class="col-6-25">
+						<div ng-hide="showForm">{{companyDetailed.company_address}}</div>
+						<input type="text" ng-model="companyDetailed.company_address" ng-show="showForm">
+					</li>	
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						COMPANY ID
+					</li>
+					<li class="col-4-25">
+						<div ng-hide="showForm">{{companyDetailed.company_register_id}}</div>
+						<input type="text" ng-model="companyDetailed.company_register_id" ng-show="showForm">
+					</li>		
+					<li class="col-3-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						TAX ID
+					</li>
+					<li class="col-4-25">
+						<div ng-hide="showForm">{{companyDetailed.company_tax_id}}</div>
+						<input type="text" ng-model="companyDetailed.company_tax_id" ng-show="showForm">
+					</li>	
 
-				<li class="col-4-25 styling-green">POSTAL NUMBER</li>
-				<li class="col-6-25">{{companyDetailed.postal_number}}</li>
-				<li class="col-4-25 styling-green">POSTAL SERVICE</li>
-				<li class="col-11-25">{{companyDetailed.postal_service}}</li>
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						POSTAL NUMBER
+					</li>
+					<li class="col-6-25">
+						<div ng-hide="showForm">{{companyDetailed.postal_number}}</div>
+						<input type="text" ng-model="companyDetailed.postal_number" ng-show="showForm">
+					</li>
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						POSTAL SERVICE
+					</li>
+					<li class="col-11-25">
+						<div ng-hide="showForm">{{companyDetailed.postal_service}}</div>
+						<input type="text" ng-model="companyDetailed.postal_service" ng-show="showForm">
+					</li>
 
-				<li class="col-4-25 styling-green">POSTAL NAME</li>
-				<li class="col-6-25">{{companyDetailed.postal_name}}</li>		
-				<li class="col-4-25 styling-green">POSTAL ADDRESS</li>
-				<li class="col-11-25">{{companyDetailed.postal_address}}</li>	
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						POSTAL NAME
+					</li>
+					<li class="col-6-25">
+						<div ng-hide="showForm">{{companyDetailed.postal_name}}</div>
+						<input type="text" ng-model="companyDetailed.postal_name" ng-show="showForm">
+					</li>		
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						POSTAL ADDRESS
+					</li>
+					<li class="col-11-25">
+						<div ng-hide="showForm">{{companyDetailed.postal_address}}</div>
+						<input type="text" ng-model="companyDetailed.postal_address" ng-show="showForm">
+					</li>	
 
-				<li class="col-4-25 styling-green">MANAGER NAME</li>
-				<li class="col-6-25">{{companyDetailed.manager_name}}</li>	
-				<li class="col-4-25 styling-green">MAN. STATUS</li>
-				<li class="col-4-25">{{companyDetailed.manager_status}}</li>
-				<li class="col-3-25 styling-green">MAN. ID</li>
-				<li class="col-4-25">{{companyDetailed.manager_id}}</li>
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						MANAGER NAME
+					</li>
+					<li class="col-6-25">
+						<div ng-hide="showForm">{{companyDetailed.manager_name}}</div>
+						<input type="text" ng-model="companyDetailed.manager_name" ng-show="showForm">
+					</li>	
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						MAN. STATUS
+					</li>
+					<li class="col-4-25">
+						<div ng-hide="showForm">{{companyDetailed.manager_status}}</div>
+						<input type="text" ng-model="companyDetailed.manager_status" ng-show="showForm">
+					</li>
+					<li class="col-3-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						MAN. ID
+					</li>
+					<li class="col-4-25">
+						<div ng-hide="showForm">{{companyDetailed.manager_id}}</div>
+						<input type="text" ng-model="companyDetailed.manager_id" ng-show="showForm">
+					</li>
 
-				<li class="col-4-25 styling-green">MAN. MOTHER'S NAME</li>
-				<li class="col-6-25">{{companyDetailed.manager_mother_name}}</li>		
-				<li class="col-4-25 styling-green">MANAGER ADDRESS</li>
-				<li class="col-11-25">{{companyDetailed.manager_address}}</li>
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						MAN. MOTHER'S NAME
+					</li>
+					<li class="col-6-25">
+						<div ng-hide="showForm">{{companyDetailed.manager_mother_name}}</div>
+						<input type="text" ng-model="companyDetailed.manager_mother_name" ng-show="showForm">
+					</li>		
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						MANAGER ADDRESS
+					</li>
+					<li class="col-11-25">
+						<div ng-hide="showForm">{{companyDetailed.manager_address}}</div>
+						<input type="text" ng-model="companyDetailed.manager_address" ng-show="showForm">
+					</li>
 
-				<li class="col-4-25 styling-green">DOCUMENTS HOLDER</li>
-				<li class="col-6-25">{{companyDetailed.document_holder}}</li>		
-				<li class="col-4-25 styling-green">DOCUMENTS ADDRESS</li>
-				<li class="col-11-25">{{companyDetailed.document_holder_address}}</li>	
-			</ul>
-			<!-- show detailed company informations END -->
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						DOCUMENTS HOLDER
+					</li>
+					<li class="col-6-25">
+						<div ng-hide="showForm">{{companyDetailed.document_holder}}</div>
+						<input type="text" ng-model="companyDetailed.document_holder" ng-show="showForm">
+					</li>		
+					<li class="col-4-25" ng-class="{green:'styling-green', yellow:'styling-yellow', red:'styling-red'}[companyDetailed.css_color]">
+						DOCUMENTS ADDRESS
+					</li>
+					<li class="col-11-25">
+						<div ng-hide="showForm">{{companyDetailed.document_holder_address}}</div>
+						<input type="text" ng-model="companyDetailed.document_holder_address" ng-show="showForm">
+					</li>	
+				</ul>
+				<!-- show detailed company informations END -->
 
-			<!-- EDIT COPANY AND PRINT CONTRACT -->
-			<ul class="flex feature-styling styling-grey">
-				<li class="col-6-25"><input type="button" value="EDIT SELECTED"></li>
-				<li class="col-8-25"><input type="button" value="SAVE INTO DATABASE"></li>
-				<li class="col-5-25"><input type="button" value="CANCEL"></li>
-				<li class="col-6-25"><input type="button" value="PRINT CONTRACT"></li>
-			</ul><!-- edit company and print contract -->
-
+				<!-- EDIT COPANY AND PRINT CONTRACT -->
+				<ul class="flex feature-styling styling-grey">
+					<li class="col-6-25"><input type="button" value="EDIT" ng-click="showForm = !showForm"></li>
+					<li class="col-8-25"><input type="button" value="SAVE INTO DATABASE" ng-click="overwriteData(companyDetailed)"></li>
+					<li class="col-5-25"><input type="button" value="CANCEL" ng-click="resetForm()"></li>
+					<li class="col-6-25"><input type="button" value="PRINT CONTRACT"></li>
+				</ul><!-- edit company and print contract -->
+			</div>
 <!-- dynamic data content END -->
 		</div>
 <!-- dynamic content container END -->

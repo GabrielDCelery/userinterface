@@ -100,9 +100,51 @@ Get detailed info of selected companies
 			data: $scope.selectedCompanies
 		})
 		request.success(function(data){
-			console.log(data)
 			$scope.companiesDetailed = data;
+			/*Adding css properties to the fetched data*/
+			$scope.companiesDetailed.map(function(obj){
+				if (obj.contract_status == true && obj.postal_number != null){
+					obj.css_color = "green";
+				} else if (obj.contract_status == true && obj.postal_number == null){
+					obj.css_color = "yellow";
+				} else {
+					obj.css_color = "red";
+				}
+			})
+			/*Formatting the date properly*/			
+			$scope.companiesDetailed.map(function(obj){
+				obj.starting_date = $scope.dateConverter(obj.starting_date);
+				obj.ending_date = $scope.dateConverter(obj.ending_date);
+				obj.transfer_date = $scope.dateConverter(obj.transfer_date);
+				obj.invoice_date = $scope.dateConverter(obj.invoice_date);
+			})
+
+			$scope.companiesDetailedMaster = angular.copy($scope.companiesDetailed)
+
+			console.log($scope.companiesDetailed)
 		})
 	}
+
+/********
+Form functions
+********/
+
+	$scope.resetForm = function(){
+		$scope.companiesDetailed = $scope.companiesDetailedMaster;
+	}
+
+	$scope.overwriteData = function(data){
+		console.log(data);
+	}
+
+/********
+Date converter function
+********/
+	
+	$scope.dateConverter = function(stringDate){
+		var outputDate = new Date(stringDate);
+		return outputDate;
+	}
+
 
 }]);
