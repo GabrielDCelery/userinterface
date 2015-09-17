@@ -9,6 +9,7 @@ Google-like search in an input field
 
 	$http.get('features/searchforcompany/searchforname.php').success(function(data){
 		$scope.names = data;
+		console.log($scope.names)
 	})
 
 	$scope.formData = {
@@ -55,14 +56,15 @@ List the items according to search properties
 			$scope.companies = data;
 			/*Adding css properties to the fetched data*/
 			$scope.companies.map(function(obj){
-				if (obj.contract_status == true && obj.postal_number != null){
-					obj.css_color = "green";
-				} else if (obj.contract_status == true && obj.postal_number == null){
+				if (obj.contract_status == true && (obj.postal_number == "" || obj.postal_number == null)){
 					obj.css_color = "yellow";
+				} else if (obj.contract_status == true){
+					obj.css_color = "green";
 				} else {
 					obj.css_color = "red";
 				}
 			})
+			console.log($scope.companies)
 		})
 		$scope.sortField = "company_name";
 		$scope.selectedCompanies = {
@@ -103,10 +105,10 @@ Get detailed info of selected companies
 			$scope.companiesDetailed = data;
 			/*Adding css properties to the fetched data*/
 			$scope.companiesDetailed.map(function(obj){
-				if (obj.contract_status == true && obj.postal_number != null){
-					obj.css_color = "green";
-				} else if (obj.contract_status == true && obj.postal_number == null){
+				if (obj.contract_status == true && (obj.postal_number == "" || obj.postal_number == null)){
 					obj.css_color = "yellow";
+				} else if (obj.contract_status == true){
+					obj.css_color = "green";
 				} else {
 					obj.css_color = "red";
 				}
@@ -118,10 +120,8 @@ Get detailed info of selected companies
 				obj.transfer_date = $scope.dateConverter(obj.transfer_date);
 				obj.invoice_date = $scope.dateConverter(obj.invoice_date);
 			})
-
-			$scope.companiesDetailedMaster = angular.copy($scope.companiesDetailed)
-
 			console.log($scope.companiesDetailed)
+			$scope.companiesDetailedMaster = angular.copy($scope.companiesDetailed)
 		})
 	}
 
@@ -134,7 +134,14 @@ Form functions
 	}
 
 	$scope.overwriteData = function(data){
-		console.log(data);
+		console.log(data)
+		$http({
+			method: 'POST',
+			url: 'features/searchforcompany/overwritenames.php',
+			data: data
+		}).success(function(data){
+			console.log(data)
+		})
 	}
 
 /********

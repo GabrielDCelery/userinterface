@@ -19,7 +19,7 @@ if(count($company_id_list) > 0){
 	}
 
 	$result = $pdo->query($q);
-	$rows = $result->fetchAll();
+	$rows = $result->fetchAll(PDO::FETCH_ASSOC);
 	echo(json_encode($rows));
 
 } else {

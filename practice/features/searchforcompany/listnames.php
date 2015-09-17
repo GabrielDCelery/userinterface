@@ -61,7 +61,7 @@ if ($unique_results == true){
 }
 
 $result = $pdo->query($q);
-$rows = $result->fetchAll();
+$rows = $result->fetchAll(PDO::FETCH_ASSOC);
 echo(json_encode($rows));
 
 ?>
