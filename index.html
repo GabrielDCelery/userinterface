@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+	<meta charset="utf-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular-route.min.js"></script>
+	<script src="modules/checklist-model-0.5.0/checklist-model.js"></script>	 
+	<script src="index.js"></script>
+	<script src="companies/companies.js"></script>
+
+</head>
+
+
+<body ng-app="managerInterface">
+<!-- MAIN WRAPPER -->
+	<div class="wrapper flex">
+<!-- MAIN MENU -->
+		<ul class="menu">
+			<li class="menu-blue">
+				<a href="#/companies">
+					<img src="images/svg-contract.svg">
+					<p>CONTRACTS</p>
+				</a>
+			</li>
+			<li class="menu-blue">
+				<a href="">
+					<img src="images/svg-mail.svg">
+					<p>MAILING</p>
+				</a>
+			</li>
+			<li class="menu-blue">
+				<a href="">
+					<img src="images/svg-invoice.svg">
+					<p>INVOICES</p>
+				</a>
+			</li>
+		</ul>
+<!-- main menu END -->
+
+<!-- DYNAMIC CONTENT -->
+	<div class="container-dynamic-content">
+		<div ng-view></div>
+	</div>
+<!-- dynamic content END -->
+
+	</div>
+<!-- main wrapper END -->
+
+
+
+
+</body>
