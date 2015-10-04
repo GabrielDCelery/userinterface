@@ -201,26 +201,44 @@ INPUT - MENU AND DATA
 	flex-wrap: nowrap;
 }
 
-.menu-input img:hover {
+.menu-input img {
 	width: 100%;
 }
 
-#menu-listing {
+.menu-input a:hover {
+	cursor: pointer;
+}
+
+.menu-listing {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-#menu-listing li {
+.menu-listing li {
 	font-size: 20px;
 	margin: 5px;
 	padding: 10px;
+}
+
+.menu-listing li:hover{
+	color: #fff;
+	cursor: pointer;
+}
+
+.menu-listing-red li{
 	border: 2px solid #70263A;
 }
 
-#menu-listing li:hover{
-	color: #fff;
+.menu-listing-red li:hover {
 	background-image: radial-gradient(#B0304E,#70263A);
-	cursor: pointer;
+}
+
+.menu-listing-green li{
+	border: 2px solid #2A7026;
+}
+
+.menu-listing-green li:hover {
+	background-image: radial-gradient(#34B030,#2A7026);
 }
 
 /******************************************************************************************

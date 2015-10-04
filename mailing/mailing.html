@@ -1,0 +1,222 @@
+
+<!-- SEARCH MAILS -->
+<ul class="menu-input menu-red" ng-show="display.featureSearchMails">
+	<li class="col-4-25">
+		COMPANY NAME
+	</li>
+	<li class="col-7-25">
+		<input type="text" ng-model="formForSearchingMailData.companyName" ng-keyup="filterListOfCompanyNames(formForSearchingMailData.companyName)">
+	</li>
+	<li class="col-4-25">
+		DATE INTERVAL
+	</li>
+	<li class="col-5-25">
+		<input type="date" ng-model="formForSearchingMailData.startingDate">
+	</li>
+	<li class="col-5-25">
+		<input type="date" ng-model="formForSearchingMailData.endingDate">
+	</li>
+	<li class="col-6-25">
+		<input type="checkbox" ng-model="formForSearchingMailData.nonForwarded">
+		NON-FORWARDED
+	</li>
+	<li class="col-6-25">
+		<input type="checkbox" ng-model="formForSearchingMailData.forwarded">
+		FORWARDED
+	</li>
+	<li class="col-6-25">
+		<input type="checkbox" ng-model="formForSearchingMailData.hasPostalService">
+		HAS POSTAL SERVICE
+	</li>
+	<li class="col-7-25">
+		<input type="checkbox" ng-model="formForSearchingMailData.doesntHavePoastalService">
+		DOESN'T HAVE POSTAL SERVICE
+	</li>
+	<li class="col-25-25">
+		<button ng-click="sendFormForSearchingMailData()">LIST EMAILS</button>
+	</li>
+</ul>
+<!-- search mails END -->
+
+<!-- FILTERED COMPANIES LISTING WHILE SEARCHING-->
+<ul class="menu-listing menu-listing-red" ng-show="display.featureSearchMails">
+	<li ng-repeat="companyName in filteredListOfCompanyNames" ng-click="insertCompanyNameToSearchField(companyName)">{{companyName}}</li>
+</ul>
+<!-- filtered companies listing while searching END -->
+
+
+<!-- FORWARDING MAILS -->
+<ul class="menu-input menu-purple" ng-show="display.featureForwardMails">
+	<li class="col-4-25">
+		FORW. DATE
+	</li>
+	<li class="col-8-25">
+		<input type="date" ng-model="formForForwarding.forwarding_date">
+	</li>
+	<li class="col-4-25">
+		FORW. METHOD
+	</li>
+	<li class="col-9-25">
+		<input type="text" ng-model="formForForwarding.forwarding_method">
+	</li>
+	<li class="col-12-25">
+		<button ng-click="forwardMails()">SAVE INTO DATABASE FOR SELECTED</button>
+	</li>
+	<li class="col-13-25">
+		<button>PRINT FORM FOR SELECTED</button>
+	</li>
+</ul>
+<!-- forwarding mails END -->
+
+<!-- EDIT SELECTED MAILS -->
+<ul class="menu-input menu-yellow" ng-show="display.featureEditMails">
+	<li class="col-6-25">
+		<button ng-click="editMailData()">EDIT SELECTED</buton>
+	</li>
+	<li class="col-5-25">
+		<button ng-click="resetMailData()">CANCEL</buton>
+	</li>
+	<li class="col-7-25">
+		<button ng-click="overWriteMailData()">SAVE INTO DATABASE</buton>
+	</li>
+	<li class="col-7-25">
+		<button ng-click="deleteMailData()">DELETE SELECTED</buton>
+	</li>
+</ul>
+<!-- edit selected mails END -->
+
+<!-- ADD MAILS-->
+<ul class="menu-input menu-green" ng-show="display.featureAddNewMails">
+	<li class="col-4-25">
+		COMPANY NAME
+	</li>
+	<li class="col-8-25">
+		<input type="text" ng-model="formForAddingNewMails.companyName"  ng-keyup="filterListOfCompanyNames(formForAddingNewMails.companyName)">
+	</li>
+	<li class="col-4-25">
+		DATE
+	</li>
+	<li class="col-9-25">
+		<input type="date" ng-model="formForAddingNewMails.receivingDate">
+	</li>
+</ul>
+<ul class="menu-input menu-green" ng-show="display.featureAddNewMails" ng-repeat="newMail in formForAddingNewMails.mails">
+	<li class="col-4-25">
+		SENDER NAME
+	</li>
+	<li class="col-7-25">
+		<input type="text" ng-model="newMail.senderName" ng-keyup="filterListOfMailingAddresses(newMail)">
+	</li>
+	<li class="col-4-25">
+		SENDER ADDRESS
+	</li>
+	<li class="col-8-25">
+		<input type="text" ng-model="newMail.senderAddress" ng-keyup="filterListOfMailingAddresses(newMail)">
+	</li>
+	<li class="col-1-25">
+		<a ng-click="addNewRowToAddMailForm()">
+			<img src="images/svg-add.svg">
+		</a>
+	</li>
+	<li class="col-1-25">
+		<a ng-click="removeRowFromAddMailForm(newMail)">
+			<img src="images/svg-remove.svg">
+		</a>
+	</li>
+</ul>
+<ul class="menu-input menu-green" ng-show="display.featureAddNewMails">
+	<li class="col-25-25">
+		<button ng-click="addNewMailsToTheDatabase()">ADD MAILS</button>
+	</li>
+</ul>
+<!-- add mails END -->
+
+<!-- FILTERED COMPANIES LISTING WHILE ADDING NEW MAIL-->
+<ul class="menu-listing menu-listing-green" ng-show="display.featureAddNewMails">
+	<li ng-repeat="companyName in filteredListOfCompanyNames" ng-click="insertCompanyNameToAddNewMailNameField(companyName)">{{companyName}}</li>
+</ul>
+<!-- filtered companies listing while adding new mail END -->
+
+<!-- FILTERED ADDRESS LISTING WHILE ADDING NEW MAIL-->
+<ul class="menu-listing menu-listing-green" ng-show="display.featureAddNewMails">
+	<li ng-repeat="mailingAddress in filteredListOfMailingAddresses" ng-click="insertMailingAddressToAddNewMailField(mailingAddress)">{{mailingAddress.sender_name}}, {{mailingAddress.sender_address}}</li>
+</ul>
+<!-- filtered ADDRESS listing while adding new mail END -->
+
+<!-- MAIL SHORTLIST MENU -->
+<ul class="data-menu data-blue" ng-show="display.dataMenu">
+	<li class="col-1-25">
+		<input type="checkbox" ng-click="checkAll()">
+	</li>
+	<li class="col-4-25" ng-click = "sortShortMailsList = 'company_name'; listingReverse = !listingReverse">COMPANY NAME</li>
+	<li class="col-4-25" ng-click = "sortShortMailsList = 'sender_name'; listingReverse = !listingReverse">SENDER NAME</li>
+	<li class="col-6-25" ng-click = "sortShortMailsList = 'sender_address'; listingReverse = !listingReverse">SENDER ADDRESS</li>
+	<li class="col-3-25" ng-click = "sortShortMailsList = 'receiving_date'; listingReverse = !listingReverse">DATE</li>
+	<li class="col-3-25" ng-click = "sortShortMailsList = 'forwarding_date'; listingReverse = !listingReverse">FORW. DATE</li>
+	<li class="col-4-25" ng-click = "sortShortMailsList = 'forwarding_method'; listingReverse = !listingReverse">FORW. METHOD</li>
+</ul><!-- mail shortlist menu END-->
+
+<!-- MAIL SHORTLIST -->
+<ul class="data" ng-class="{green:'data-green', yellow:'data-yellow'}[mail.css_color]" ng-repeat="mail in mailsShortList | orderBy:sortShortMailsList:listingReverse">
+	<li class="col-1-25"><input type="checkbox" checklist-model="selectedMails.id" checklist-value="mail.mail_id"></li>
+	<li class="col-4-25">
+		<div ng-hide="mail.show_input">{{mail.company_name}}</div>
+		<input type="text" ng-model="mail.company_name" ng-show="mail.show_input">
+	</li>
+	<li class="col-4-25">
+		<div ng-hide="mail.show_input" ng-show="mail.show_input">{{mail.sender_name}}</div>
+		<input type="text" ng-model="mail.sender_name" ng-show="mail.show_input">
+	</li>
+	<li class="col-6-25">
+		<div ng-hide="mail.show_input" ng-show="mail.show_input">{{mail.sender_address}}</div>
+		<input type="text" ng-model="mail.sender_address" ng-show="mail.show_input">
+	</li>
+	<li class="col-3-25">
+		<div ng-hide="mail.show_input" ng-show="mail.show_input">{{mail.receiving_date | date: "yyyy-MM-dd"}}</div>
+		<input type="date" ng-model="mail.receiving_date" ng-show="mail.show_input">
+	</li>
+	<li class="col-3-25">
+		<div ng-hide="mail.show_input" ng-show="mail.show_input">{{mail.forwarding_date | date: "yyyy-MM-dd"}}</div>
+		<input type="date" ng-model="mail.forwarding_date" ng-show="mail.show_input">
+	</li>
+	<li class="col-4-25">
+		<div ng-hide="mail.show_input" ng-show="mail.show_input">{{mail.forwarding_method}}</div>
+		<input type="text" ng-model="mail.forwarding_method" ng-show="mail.show_input">
+	</li>
+</ul><!-- mail shortlist END-->
+
+
+<!-- MAIN MENU FEATURES -->
+<ul class="menu-features">
+	<li class="menu-red" ng-show="display.menuSearchMails">
+		<a ng-click="searchMailsButton()">
+			<img src="images/svg-search.svg">
+			<p>SEARCH</p>
+		</a>
+	</li>
+	<li class="menu-purple" ng-show="display.menuForwardMails">
+		<a ng-click="forwardMailsButton()">
+			<img src="images/svg-forwardmail.svg">
+			<p>FORWARD MAILS</p>
+		</a>
+	</li>
+	<li class="menu-yellow" ng-show="display.menuEditMails">
+		<a ng-click="editMailsButton()">
+			<img src="images/svg-editmail.svg">
+			<p>EDIT MAILS</p>
+		</a>
+	</li>
+	<li class="menu-green" ng-show="display.menuAddNewMails">
+		<a ng-click="addNewMailsButton()">
+			<img src="images/svg-addmail.svg">
+			<p>ADD NEW</p>
+		</a>
+	</li>
+	<li class="menu-black" ng-show="display.menuReset">
+		<a ng-click="resetData()">
+			<img src="images/svg-undo.svg">
+			<p>RESET</p>
+		</a>
+	</li>
+</ul>
+<!-- main menu features END -->

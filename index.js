@@ -7,7 +7,7 @@ managerInterface.config(function($routeProvider){
 	}).when('/companies', {
 		templateUrl: 'companies/companies.html',
 		controller: 'companiesCtrl'
-	}).when('/mailing/mailing', {
+	}).when('/mailing', {
 		templateUrl: 'mailing/mailing.html',
 		controller: 'mailingCtrl'
 	}).when('/invoices/invoices.html', {
