@@ -5,14 +5,13 @@ require("../settings.php");
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
-$forwarding_date = $request->forwarding_date;
-$forwarding_method = $request->forwarding_method;
-$id_list = $request->id;
-
+$forwarding_date = $request->forwardingDate;
 if(!is_null($forwarding_date)){
 	$forwarding_date = strtotime($forwarding_date);
 	$forwarding_date = date('Y-m-d', $forwarding_date);
 }
+$forwarding_method = $request->forwardingMethod;
+$id_list = $request->id;
 
 foreach($id_list as $id){
 	$q = 'UPDATE mailing SET ';

@@ -41,13 +41,13 @@
 <!-- search companies END -->
 
 <!-- SEARCH COMPANIES LISTING -->
-<ul id="menu-listing" ng-show="display.featureSearchCompany">
+<ul class="menu-listing menu-listing-red" ng-show="display.featureSearchCompany">
 	<li ng-repeat="companyName in filteredListOfCompanyNames" ng-click="insertCompanyNameToInputField(companyName)">{{companyName}}</li>
 </ul>
 <!-- search companies listing END -->
 
 <!-- SEARCH NAMES LISTING -->
-<ul id="menu-listing" ng-show="display.featureSearch">
+<ul class="menu-listing menu-listing-red" ng-show="display.featureSearch">
 	<li ng-repeat="managerName in filteredListOfManagerNames" ng-click="insertManagerNameToInputField(managerName)">{{managerName}}</li>
 </ul>
 <!-- search names listing END -->
