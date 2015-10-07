@@ -31,7 +31,13 @@ a {
 MAIN STRUCTURE
 ******************************************************************************************/
 
-html, body {
+body {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar{
+	width:0px;
 }
 
 .wrapper {
