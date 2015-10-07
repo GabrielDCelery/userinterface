@@ -1,4 +1,4 @@
-managerInterface.controller('mailingCtrl', function($scope, $http){
+managerInterface.controller('mailingCtrl', function($scope, $http, $window){
 
 /***********************************************************************************
 Variables and objects
@@ -356,6 +356,19 @@ Adding new mails functions
 				alert(data);
 			})
 		}
+	}
+
+/***********************************************************************************
+Logout
+***********************************************************************************/
+
+	$scope.logout = function(){
+		$http({
+			method:'GET',
+			url: 'login/logout.php'
+		}).success(function(data){
+			$window.location.href = '';
+		})
 	}
 
 

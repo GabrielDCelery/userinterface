@@ -1,5 +1,5 @@
 
-managerInterface.controller('companiesCtrl', function($scope, $http){
+managerInterface.controller('companiesCtrl', function($scope, $http, $window){
 
 /***********************************************************************************
 Variables and objects
@@ -418,6 +418,19 @@ Add new company to database
 				data: $scope.addNewCompany
 			}).success(function(data){
 				alert(data);
+		})
+	}
+
+/***********************************************************************************
+Logout
+***********************************************************************************/
+
+	$scope.logout = function(){
+		$http({
+			method:'GET',
+			url: 'login/logout.php'
+		}).success(function(data){
+			$window.location.href = '';
 		})
 	}
 
