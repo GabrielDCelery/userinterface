@@ -30,18 +30,18 @@
 <div class="container-dynamic-content">
 
 <!-- SEARCH COMPANIES END -->
-	<ul class="menu-input menu-red" ng-show="display.featureSearchCompany">
+	<ul class="menu-input menu-red" ng-show="display.form.searchCompany">
 		<li class="col-5-25">
 			COMPANY NAME
 		</li>
 		<li class="col-8-25">
-			<input type="text" ng-model="formForSearchingCompanyData.companyName" ng-keyup="filterListOfCompanyNames(formForSearchingCompanyData.companyName)">
+			<input type="text" ng-model="formForSearchingCompanyData.companyName" ng-keyup="filterListOfCompanyNames()">
 		</li>
 		<li class="col-5-25">
 			MANAGER NAME
 		</li>
 		<li class="col-7-25">
-			<input type="text" ng-model="formForSearchingCompanyData.managerName" ng-keyup="filterListOfManagerNames(formForSearchingCompanyData.managerName)">
+			<input type="text" ng-model="formForSearchingCompanyData.managerName" ng-keyup="filterListOfManagerNames()">
 		</li>
 		<li class="col-7-25">
 			EXPIRATION DATE INTERVAL
@@ -71,19 +71,19 @@
 	<!-- search companies END -->
 
 	<!-- FILTERED COMPANIES LISTING WHILE SEARCHING-->
-	<ul class="menu-listing menu-listing-red" ng-show="display.featureSearchCompany">
+	<ul class="menu-listing menu-listing-red" ng-show="display.form.searchCompany">
 		<li ng-repeat="companyName in filteredListOfCompanyNames" ng-click="insertCompanyNameToInputField(companyName)">{{companyName}}</li>
 	</ul>
 	<!-- filtered companies listing while searching END -->
 
 	<!-- FILTERED MANAGERS LISTING WHILE SEARCHING-->
-	<ul class="menu-listing menu-listing-red" ng-show="display.featureSearchCompany">
+	<ul class="menu-listing menu-listing-red" ng-show="display.form.searchCompany">
 		<li ng-repeat="managerName in filteredListOfManagerNames" ng-click="insertManagerNameToInputField(managerName)">{{managerName}}</li>
 	</ul>
 	<!-- filtered managers listing while searching END -->
 
 	<!-- SEND EMAIL -->
-	<ul class="menu-input menu-purple" ng-show="display.featureSendEmail">
+	<ul class="menu-input menu-purple" ng-show="display.form.sendEmail">
 		<li class="col-4-25">
 			EMAIL
 		</li>
@@ -100,7 +100,7 @@
 	<!-- send email END -->
 
 	<!-- SHOW DETAILED OF SELECTED -->
-	<ul class="menu-input menu-yellow" ng-show="display.featureShowDetails">
+	<ul class="menu-input menu-yellow" ng-show="display.form.showDetails">
 		<li class="col-9-25">
 			<button ng-click="formListDetailedCompaniesInfo()">SHOW DETAILES OF SELECTED</buton>
 		</li>
@@ -114,7 +114,7 @@
 	<!-- show detailed of selected END -->
 
 	<!-- ADD COMPANY -->
-	<ul class="menu-input" ng-show="display.featureAddNewCompany">
+	<ul class="menu-input" ng-show="display.form.addNewCompany">
 		<li class="col-4-25 menu-green">COMPANY NAME</li>
 		<li class="col-6-25"><input type="text" ng-model="addNewCompany.companyName" value="{{addNewCompany.companyName}}"></li>
 		<li class="col-4-25 menu-green">STARTING DATE</li>
@@ -192,7 +192,7 @@
 
 
 	<!-- COMPANY SHORTLIST MENU -->
-	<ul class="data-menu data-blue" ng-show="display.listedDataMenu">
+	<ul class="data-menu data-blue" ng-show="display.data.companiesShortList">
 		<li class="col-1-25">
 			<input type="checkbox" ng-click="checkAll()">
 		</li>
@@ -216,7 +216,7 @@
 	</ul><!-- company shortlist END-->
 
 	<!-- SHOW DETAILED COMPANY INFORMATIONS -->
-	<div ng-repeat="companyDetailed in companiesDetailed | orderBy:sortShortCompanyList" ng-show="display.detailedCompaniesInformation">
+	<div ng-repeat="companyDetailed in companiesDetailed | orderBy:sortShortCompanyList" ng-show="display.data.companiesDetailed">
 		<ul class="data-input">
 			<li class="col-4-25" ng-class="{green:'data-green', yellow:'data-yellow', red:'data-red'}[companyDetailed.css_color]">
 				COMPANY NAME
@@ -448,7 +448,7 @@
 	<!-- show detailed company informations END -->
 
 	<!-- EXTENDING CONTRACT FORM -->
-	<div ng-repeat="companyDetailed in companyDataForExtendingContract | orderBy:sortShortCompanyList" ng-show="display.extendingContract">
+	<div ng-repeat="companyDetailed in companyDataForExtendingContract | orderBy:sortShortCompanyList" ng-show="display.data.companiesExtendContract">
 		<ul class="data-input">
 			<li class="col-4-25" ng-class="{green:'data-green', yellow:'data-yellow', red:'data-red'}[companyDetailed.css_color]">
 				COMPANY NAME
@@ -682,31 +682,31 @@
 
 	<!-- MAIN MENU FEATURES -->
 	<ul class="menu-features">
-		<li class="menu-red"  ng-show="display.menuSearchCompany">
+		<li class="menu-red"  ng-show="display.menu.searchCompany">
 			<a ng-click="searchCompanyButton()">
 				<img src="images/svg-search.svg">
 				<p>SEARCH</p>
 			</a>
 		</li>
-		<li class="menu-purple" ng-show="display.menuSendEmail">
+		<li class="menu-purple" ng-show="display.menu.sendEmail">
 			<a ng-click="sendEmailButton()">
 				<img src="images/svg-email.svg">
 				<p>EMAIL</p>
 			</a>
 		</li>
-		<li class="menu-yellow" ng-show="display.menuShowDetails">
+		<li class="menu-yellow" ng-show="display.menu.showDetails">
 			<a ng-click="showDetailsButton()">
 				<img src="images/svg-detailed.svg">
 				<p>DETAILS</p>
 			</a>
 		</li>
-		<li class="menu-green" ng-show="display.menuAddNewCompany">
+		<li class="menu-green" ng-show="display.menu.addNewCompany">
 			<a ng-click="addNewCompanyButton()">
 				<img src="images/svg-addcompany.svg">
 				<p>ADD NEW</p>
 			</a>
 		</li>
-		<li class="menu-black" ng-show="display.menuReset">
+		<li class="menu-black" ng-show="display.menu.reset">
 			<a ng-click="resetDataButton()">
 				<img src="images/svg-undo.svg">
 				<p>RESET</p>

@@ -1,32 +1,29 @@
-managerInterface.controller('mailingCtrl', function($scope, $http, $window){
+managerInterface.controller('mailingCtrl', function($scope, $http, $window, getCompanyNames, getMailingAddresses, mailFunctions, menuButtons){
 
 /***********************************************************************************
 Variables and objects
 ***********************************************************************************/
 
-/* Objects holding the names of companies and managers in the system */
-	/* Fetch list of company names from server */
-	$http.get('mailing/fetch_company_names.php').success(function(data){
-		$scope.listOfCompanyNames = data;
-	})
-
-	/* Fetch list of mailing addresses from server */
-	$http.get('mailing/fetch_mailing_addresses.php').success(function(data){
-		$scope.listOfMailingAddresses = data;
-	})
-
 /* Object to control what's displayed on the screen and what's not */
 	$scope.display = {
-		menuSearchMails: true,
-		menuForwardMails: false,
-		menuEditMails: false,
-		menuAddNewMails: true,
-		menuReset: true,
-		formSearchMails: false,
-		formForwardMails: false,
-		formEditMails: false,
-		formAddNewMails: false,
-		listedDataMenu: false
+		menu: {
+			searchMails: true,
+			forwardMails: false,
+			editMails: false,
+			addNewMails: true,
+			reset: true
+		},
+
+		form: {
+			searchMails: false,
+			forwardMails: false,
+			editMails: false,
+			addNewMails: false
+		},
+
+		data: {
+			mailsShortlist: false
+		}
 	}
 
 /* Formdata for searching mails */
@@ -68,6 +65,14 @@ Variables and objects
 		allChecked: false
 	}
 
+/* Master objects */
+
+	$scope.formForSearchingMailDataMaster = angular.copy($scope.formForSearchingMailData);
+	$scope.formForForwardingMailsMaster = angular.copy($scope.formForForwardingMails);
+	$scope.formForAddingNewMailsMaster = angular.copy($scope.formForAddingNewMails);
+	
+	$scope.displayMaster = angular.copy($scope.display);
+
 /***********************************************************************************
 Date converter function
 ***********************************************************************************/
@@ -82,31 +87,27 @@ Feature menu button functions
 ***********************************************************************************/
 
 	$scope.searchMailsButton = function(){
-		$scope.display.formSearchMails = !$scope.display.formSearchMails;
-		$scope.display.formForwardMails = false;
-		$scope.display.formEditMails = false;
-		$scope.display.formAddNewMails = false;
+		menuButtons.changeFormDisplay("searchMails", $scope.display.form, function(data){
+			$scope.display.form = data;
+		})
 	}
 
 	$scope.forwardMailsButton = function(){
-		$scope.display.formForwardMails = !$scope.display.formForwardMails;
-		$scope.display.formSearchMails = false;
-		$scope.display.formEditMails = false;
-		$scope.display.formAddNewMails = false;
+		menuButtons.changeFormDisplay("forwardMails", $scope.display.form, function(data){
+			$scope.display.form = data;
+		})
 	}
 
 	$scope.editMailsButton = function(){
-		$scope.display.formEditMails = !$scope.display.formEditMails;
-		$scope.display.formSearchMails = false;
-		$scope.display.formForwardMails = false;
-		$scope.display.formAddNewMails = false;
+		menuButtons.changeFormDisplay("editMails", $scope.display.form, function(data){
+			$scope.display.form = data;
+		})
 	}
 
 	$scope.addNewMailsButton = function(){
-		$scope.display.formAddNewMails = !$scope.display.formAddNewMails;
-		$scope.display.formSearchMails = false;
-		$scope.display.formEditMails = false;
-		$scope.display.formForwardMails = false;
+		menuButtons.changeFormDisplay("addNewMails", $scope.display.form, function(data){
+			$scope.display.form = data;
+		})
 	}
 
 	$scope.resetDataButton = function(){
@@ -122,16 +123,15 @@ Filtering company names or mailing addresses before searching and lising data
 ***********************************************************************************/
 
 	/* Make a google-like filtering of the listed company names */
-	$scope.filterListOfCompanyNames = function (input){
-		$scope.filteredListOfCompanyNames = [];
-		if(input.length !== 0){
-			for(var i=0; i < $scope.listOfCompanyNames.length; i++){
-				if($scope.listOfCompanyNames[i].company_name.substring(0,input.length).toLowerCase() === input.toLowerCase()){
-					 $scope.filteredListOfCompanyNames.push($scope.listOfCompanyNames[i].company_name);
-				}
-			}
-		}
-	};
+	$scope.filterListOfCompanyNamesSearch = function(){
+		getCompanyNames.filterList($scope.formForSearchingMailData.companyName, function(data){
+			$scope.filteredListOfCompanyNames = data;
+	})};
+
+	$scope.filterListOfCompanyNamesAddNew = function(){
+		getCompanyNames.filterList($scope.formForAddingNewMails.companyName, function(data){
+			$scope.filteredListOfCompanyNames = data;
+	})};
 
 	/* Insert the selected name into the input field while filtering in search menu */
 	$scope.insertCompanyNameToSearchField = function(companyName){
@@ -140,21 +140,18 @@ Filtering company names or mailing addresses before searching and lising data
 	};
 
 	$scope.filterListOfMailingAddresses = function(newMail){
-		$scope.filteredListOfMailingAddresses = [];
-		if(newMail.senderName.length !== 0 || newMail.senderAddress.length !== 0){
-			for(var i=0; i < $scope.listOfMailingAddresses.length; i++){
-				if($scope.listOfMailingAddresses[i].sender_name.substring(0,newMail.senderName.length).toLowerCase() === newMail.senderName.toLowerCase() && $scope.listOfMailingAddresses[i].sender_address.substring(0,newMail.senderAddress.length).toLowerCase() === newMail.senderAddress.toLowerCase()){
-					$scope.filteredListOfMailingAddresses.push($scope.listOfMailingAddresses[i]);
-				}
-			}
-		}
-		var index = $scope.formForAddingNewMails.mails.indexOf(newMail);
-		for(var i = 0; i < $scope.formForAddingNewMails.mails.length; i++){
-			$scope.formForAddingNewMails.mails[i].activeField = false;
-		}
-		$scope.formForAddingNewMails.mails[index].activeField = true;
-	}
+		getMailingAddresses.filterList(newMail.senderName, newMail.senderAddress, function(data){
+			$scope.filteredListOfMailingAddresses = data;
 
+			var index = $scope.formForAddingNewMails.mails.indexOf(newMail);
+			for(var i = 0; i < $scope.formForAddingNewMails.mails.length; i++){
+				$scope.formForAddingNewMails.mails[i].activeField = false;
+			}
+			$scope.formForAddingNewMails.mails[index].activeField = true;
+
+		})
+	}
+	
 	/* Insert the selected name into the input field while filtering in add new mail */
 	$scope.insertCompanyNameToAddNewMailNameField = function(companyName){
 		$scope.formForAddingNewMails.companyName = companyName;
@@ -177,36 +174,21 @@ Search database for mails and list the results
 
 	$scope.formSearchMails = function(){
 
-		$scope.display.menuForwardMails = true;
-		$scope.display.menuEditMails = true;
-		$scope.display.listedDataMenu = true;
+		$scope.display.menu.forwardMails = true;
+		$scope.display.menu.editMails = true;
+		$scope.display.data.mailsShortlist = true;
 
-		$http({
-			method: 'POST',
-			url: 'mailing/form_search_mails.php',
-			data: $scope.formForSearchingMailData
-		}).success(function(data){
-			$scope.mailsShortList = data;
-			/*Formatting the date properly*/			
-			$scope.mailsShortList.map(function(obj){
-				obj.receiving_date = $scope.dateConverter(obj.receiving_date);
-				if(obj.forwarding_date == "1970-01-01" || obj.forwarding_date == "0000-00-00" || obj.forwarding_date == null){
-					obj.forwarding_date = null;
-				} else {
-					obj.forwarding_date = $scope.dateConverter(obj.forwarding_date);
-				}
-			})
-			/*Adding css property to table rows*/
-			$scope.mailsShortList.map(function(obj){
-				obj.show_input = false;
-				if (obj.forwarding_date == null){
-					obj.css_color = "yellow";
-				} else {
-					obj.css_color = "green";
-				}
-			})
-			$scope.mailsShortListMaster = angular.copy($scope.mailsShortList);
-		})
+		mailFunctions.connectToDatabase(
+			'POST',
+			'mailing/form_search_mails.php',
+			$scope.formForSearchingMailData,
+			function(data){
+				mailFunctions.data = data;
+				mailFunctions.formatDateCorrectly().addColourCoding();
+				$scope.mailsShortList = mailFunctions.data;
+				$scope.mailsShortListMaster = angular.copy($scope.mailsShortList);
+			}
+		)
 
 		$scope.selectedMails = {
 			id: [],
@@ -245,14 +227,15 @@ Edit mails functions
 	$scope.formOverWriteMails = function(){
 		var confirmOverwrite = confirm("Do you want to ovewrite the data?");
 		if(confirmOverwrite == true){
-			$http({
-				method: 'POST',
-				url: 'mailing/form_overwrite_mails.php',
-				data: $scope.mailsShortList
-			}).success(function(data){
-				$scope.formSearchMails();
-				alert(data);
-			})
+			mailFunctions.connectToDatabase(
+				'POST',
+				'mailing/form_overwrite_mails.php',
+				$scope.mailsShortList,
+				function(data){
+					$scope.formSearchMails();
+					alert(data);
+				}
+			)
 		}
 	}
 
@@ -263,14 +246,15 @@ Edit mails functions
 		} else {
 			$scope.confirmDelete = confirm("Do you want to delete the selected mails?");
 			if($scope.confirmDelete == true){
-				$http({
-					method: 'POST',
-					url: 'mailing/form_delete_mails.php',
-					data: $scope.selectedMails
-				}).success(function(data){
-					$scope.formSearchMails();
-					alert(data);
-				})
+				mailFunctions.connectToDatabase(
+					'POST',
+					'mailing/form_delete_mails.php',
+					$scope.selectedMails,
+					function(data){
+						$scope.formSearchMails();
+						alert(data);
+					}
+				)
 			}
 		}
 	}
@@ -287,14 +271,16 @@ Forward mails functions
 				$scope.confirmForwarding = confirm("Do you want to forward the selected mails?");
 				if($scope.confirmForwarding == true){
 					$scope.formForForwardingMails.id = $scope.selectedMails.id;
-					$http({
-						method: 'POST',
-						url: 'mailing/form_forward_mails.php',
-						data: $scope.formForForwardingMails
-					}).success(function(data){
-						$scope.formSearchMails();
-						alert(data);
-					})
+
+					mailFunctions.connectToDatabase(
+						'POST',
+						'mailing/form_forward_mails.php',
+						$scope.formForForwardingMails,
+						function(data){
+							$scope.formSearchMails();
+							alert(data);
+						}
+					)
 				}
 			}
 		} else {
@@ -335,26 +321,26 @@ Adding new mails functions
 		if(alertToFillData == true){
 			alert("You have to fill all the fields to add mails!")
 		} else {
-			$http({
-				method: 'POST',
-				url: 'mailing/form_add_new_mails.php',
-				data: $scope.formForAddingNewMails
-			}).success(function(data){
+			mailFunctions.connectToDatabase(
+				'POST',
+				'mailing/form_add_new_mails.php',
+				$scope.formForAddingNewMails,
+				function(data){
+					$scope.formForSearchingMailData = {
+						companyName: $scope.formForAddingNewMails.companyName,
+						startingDate: null,
+						endingDate: null,
+						nonForwarded: true,
+						forwarded: false,
+						hasPostalService: true,
+						doesntHavePoastalService: true
+					}
 
-				$scope.formForSearchingMailData = {
-					companyName: $scope.formForAddingNewMails.companyName,
-					startingDate: null,
-					endingDate: null,
-					nonForwarded: true,
-					forwarded: false,
-					hasPostalService: true,
-					doesntHavePoastalService: true
+					$scope.formSearchMails();
+
+					alert(data);
 				}
-
-				$scope.formSearchMails();
-
-				alert(data);
-			})
+			)
 		}
 	}
 
@@ -393,31 +379,9 @@ Reset data and display functions
 ***********************************************************************************/
 
 	$scope.resetData = function(){
-		$scope.formForSearchingMailData = {
-			companyName: "",
-			startingDate: null,
-			endingDate: null,
-			nonForwarded: true,
-			forwarded: true,
-			hasPostalService: true,
-			doesntHavePoastalService: true
-		}
-		
-		$scope.formForForwardingMails = {
-			forwardingDate: null,
-			forwardingMethod: null,
-			id: null
-		}
-
-		$scope.formForAddingNewMails = {
-			companyName: "",
-			receivingDate: null,
-			mails: [{
-				senderName: "",
-				senderAddress: "",
-				activeField: false
-			}]
-		}
+		$scope.formForSearchingMailData = angular.copy($scope.formForSearchingMailDataMaster);
+		$scope.formForForwardingMails = angular.copy($scope.formForForwardingMailsMaster);
+		$scope.formForAddingNewMails = angular.copy($scope.formForAddingNewMailsMaster);
 
 		$scope.sortListedMailingData = "receiving_date";
 		$scope.reverseListedMailingData = true;
@@ -429,18 +393,7 @@ Reset data and display functions
 	}
 
 	$scope.resetDisplay = function(){
-		$scope.display = {
-			menuSearchMails: true,
-			menuForwardMails: false,
-			menuEditMails: false,
-			menuAddNewMails: true,
-			menuReset: true,
-			formSearchMails: false,
-			formForwardMails: false,
-			formEditMails: false,
-			formAddNewMails: false,
-			listedDataMenu: false
-		}
+		$scope.display = angular.copy($scope.displayMaster);
 	}
 
 

@@ -29,12 +29,12 @@
 <div class="container-dynamic-content">
 
 	<!-- SEARCH MAILS -->
-	<ul class="menu-input menu-red" ng-show="display.formSearchMails">
+	<ul class="menu-input menu-red" ng-show="display.form.searchMails">
 		<li class="col-4-25">
 			COMPANY NAME
 		</li>
 		<li class="col-7-25">
-			<input type="text" ng-model="formForSearchingMailData.companyName" ng-keyup="filterListOfCompanyNames(formForSearchingMailData.companyName)">
+			<input type="text" ng-model="formForSearchingMailData.companyName" ng-keyup="filterListOfCompanyNamesSearch()">
 		</li>
 		<li class="col-4-25">
 			DATE INTERVAL
@@ -68,14 +68,14 @@
 	<!-- search mails END -->
 
 	<!-- FILTERED COMPANIES LISTING WHILE SEARCHING-->
-	<ul class="menu-listing menu-listing-red" ng-show="display.formSearchMails">
+	<ul class="menu-listing menu-listing-red" ng-show="display.form.searchMails">
 		<li ng-repeat="companyName in filteredListOfCompanyNames" ng-click="insertCompanyNameToSearchField(companyName)">{{companyName}}</li>
 	</ul>
 	<!-- filtered companies listing while searching END -->
 
 
 	<!-- FORWARDING MAILS -->
-	<ul class="menu-input menu-purple" ng-show="display.formForwardMails">
+	<ul class="menu-input menu-purple" ng-show="display.form.forwardMails">
 		<li class="col-4-25">
 			FORW. DATE
 		</li>
@@ -98,7 +98,7 @@
 	<!-- forwarding mails END -->
 
 	<!-- EDIT SELECTED MAILS -->
-	<ul class="menu-input menu-yellow" ng-show="display.formEditMails">
+	<ul class="menu-input menu-yellow" ng-show="display.form.editMails">
 		<li class="col-6-25">
 			<button ng-click="editMailData()">EDIT SELECTED</buton>
 		</li>
@@ -115,12 +115,12 @@
 	<!-- edit selected mails END -->
 
 	<!-- ADD MAILS-->
-	<ul class="menu-input menu-green" ng-show="display.formAddNewMails">
+	<ul class="menu-input menu-green" ng-show="display.form.addNewMails">
 		<li class="col-4-25">
 			COMPANY NAME
 		</li>
 		<li class="col-8-25">
-			<input type="text" ng-model="formForAddingNewMails.companyName"  ng-keyup="filterListOfCompanyNames(formForAddingNewMails.companyName)">
+			<input type="text" ng-model="formForAddingNewMails.companyName"  ng-keyup="filterListOfCompanyNamesAddNew()">
 		</li>
 		<li class="col-4-25">
 			DATE
@@ -129,7 +129,7 @@
 			<input type="date" ng-model="formForAddingNewMails.receivingDate">
 		</li>
 	</ul>
-	<ul class="menu-input menu-green" ng-show="display.formAddNewMails" ng-repeat="newMail in formForAddingNewMails.mails">
+	<ul class="menu-input menu-green" ng-show="display.form.addNewMails" ng-repeat="newMail in formForAddingNewMails.mails">
 		<li class="col-4-25">
 			SENDER NAME
 		</li>
@@ -153,7 +153,7 @@
 			</a>
 		</li>
 	</ul>
-	<ul class="menu-input menu-green" ng-show="display.formAddNewMails">
+	<ul class="menu-input menu-green" ng-show="display.form.addNewMails">
 		<li class="col-25-25">
 			<button ng-click="formAddNewMails()">ADD MAILS</button>
 		</li>
@@ -161,19 +161,19 @@
 	<!-- add mails END -->
 
 	<!-- FILTERED COMPANIES LISTING WHILE ADDING NEW MAIL-->
-	<ul class="menu-listing menu-listing-green" ng-show="display.formAddNewMails">
+	<ul class="menu-listing menu-listing-green" ng-show="display.form.addNewMails">
 		<li ng-repeat="companyName in filteredListOfCompanyNames" ng-click="insertCompanyNameToAddNewMailNameField(companyName)">{{companyName}}</li>
 	</ul>
 	<!-- filtered companies listing while adding new mail END -->
 
 	<!-- FILTERED ADDRESS LISTING WHILE ADDING NEW MAIL-->
-	<ul class="menu-listing menu-listing-green" ng-show="display.formAddNewMails">
+	<ul class="menu-listing menu-listing-green" ng-show="display.form.addNewMails">
 		<li ng-repeat="mailingAddress in filteredListOfMailingAddresses" ng-click="insertMailingAddressToAddNewMailField(mailingAddress)">{{mailingAddress.sender_name}}, {{mailingAddress.sender_address}}</li>
 	</ul>
 	<!-- filtered ADDRESS listing while adding new mail END -->
 
 	<!-- MAIL SHORTLIST MENU -->
-	<ul class="data-menu data-blue" ng-show="display.listedDataMenu">
+	<ul class="data-menu data-blue" ng-show="display.data.mailsShortlist">
 		<li class="col-1-25">
 			<input type="checkbox" ng-click="checkAll()">
 		</li>
@@ -217,31 +217,31 @@
 
 	<!-- MAIN MENU FEATURES -->
 	<ul class="menu-features">
-		<li class="menu-red" ng-show="display.menuSearchMails">
+		<li class="menu-red" ng-show="display.menu.searchMails">
 			<a ng-click="searchMailsButton()">
 				<img src="images/svg-search.svg">
 				<p>SEARCH</p>
 			</a>
 		</li>
-		<li class="menu-purple" ng-show="display.menuForwardMails">
+		<li class="menu-purple" ng-show="display.menu.forwardMails">
 			<a ng-click="forwardMailsButton()">
 				<img src="images/svg-forwardmail.svg">
 				<p>FORWARD MAILS</p>
 			</a>
 		</li>
-		<li class="menu-yellow" ng-show="display.menuEditMails">
+		<li class="menu-yellow" ng-show="display.menu.editMails">
 			<a ng-click="editMailsButton()">
 				<img src="images/svg-editmail.svg">
 				<p>EDIT MAILS</p>
 			</a>
 		</li>
-		<li class="menu-green" ng-show="display.menuAddNewMails">
+		<li class="menu-green" ng-show="display.menu.addNewMails">
 			<a ng-click="addNewMailsButton()">
 				<img src="images/svg-addmail.svg">
 				<p>ADD NEW</p>
 			</a>
 		</li>
-		<li class="menu-black" ng-show="display.menuReset">
+		<li class="menu-black" ng-show="display.menu.reset">
 			<a ng-click="resetDataButton()">
 				<img src="images/svg-undo.svg">
 				<p>RESET</p>
