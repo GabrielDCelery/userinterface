@@ -305,7 +305,7 @@ Forward mails functions
 		receit.createReceit(filteredData, function(){
 			window.location.replace("mailing/receit.docx");
 		})
-		
+
 	}
 
 /***********************************************************************************

@@ -241,7 +241,7 @@
 	</ul><!-- company shortlist menu END-->
 
 	<!-- COMPANY SHORTLIST -->
-	<ul class="data" ng-class="{green:'data-green', yellow:'data-yellow', red:'data-red'}[company.css_color]" ng-repeat="company in companiesShortList | orderBy:sortShortCompanyList">
+	<ul class="data" ng-show="display.data.companiesShortList" ng-class="{green:'data-green', yellow:'data-yellow', red:'data-red'}[company.css_color]" ng-repeat="company in companiesShortList | orderBy:sortShortCompanyList">
 		<li class="col-1-25"><input type="checkbox" checklist-model="selectedCompanies.id" checklist-value="company.company_id"></li>
 		<li class="col-5-25">{{company.company_name}}</li>
 		<li class="col-6-25">{{company.company_email}}</li>

@@ -140,6 +140,7 @@ Menu button functions
 			$scope.display.form = data;
 			
 		})
+		console.log($scope.display)
 	}
 
 	$scope.resetDataButton = function(){
