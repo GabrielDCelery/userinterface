@@ -11,9 +11,15 @@ $login_password = $request->password;
 
 $pdo = new PDO('mysql:dbname=' . $dbname . ';host=' . $host, 'root', null, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 
-$querystring = 'SELECT password FROM users WHERE username = "' . $login_username . '"';
-$query = $pdo->query($querystring);
-$results = $query->fetchAll(PDO::FETCH_ASSOC);
+$querystring = 'SELECT password FROM users WHERE username = :login_username';
+$preparedstatement = $pdo->prepare($querystring);
+/*
+$preparedstatement->bindParam("login_username", $login_username);
+$preparedstatement->execute();
+*/
+$preparedstatement->execute(array("login_username" => $login_username));
+
+$results = $preparedstatement->fetchAll(PDO::FETCH_ASSOC);
 
 if($results != null){
 	if($results[0]['password'] == $login_password){

@@ -56,39 +56,39 @@ $manager_address = $request->manager_address;
 $document_holder = $request->document_holder;
 $document_holder_address = $request->document_holder_address;
 
-$query_string = 'INSERT INTO companies_detailed(';
-$query_string .= 'company_id, ';
-$query_string .= 'starting_date, ';
-$query_string .= 'ending_date, ';
-$query_string .= 'company_phone, ';
-$query_string .= 'company_email, ';
-$query_string .= 'invoice_number, ';
-$query_string .= 'service_provider, ';
+$querystring = 'INSERT INTO companies_detailed(';
+$querystring .= 'company_id, ';
+$querystring .= 'starting_date, ';
+$querystring .= 'ending_date, ';
+$querystring .= 'company_phone, ';
+$querystring .= 'company_email, ';
+$querystring .= 'invoice_number, ';
+$querystring .= 'service_provider, ';
 
-$query_string .= 'transfer_date, ';
-$query_string .= 'invoice_date, ';
-$query_string .= 'payment_method, ';
-$query_string .= 'account_number, ';
+$querystring .= 'transfer_date, ';
+$querystring .= 'invoice_date, ';
+$querystring .= 'payment_method, ';
+$querystring .= 'account_number, ';
 
 
-$query_string .= 'price_of_serv_num, ';
-$query_string .= 'price_of_serv_let, ';
-$query_string .= 'company_address, ';
-$query_string .= 'company_register_id, ';
-$query_string .= 'company_tax_id, ';
-$query_string .= 'postal_number, ';
-$query_string .= 'postal_service, ';
-$query_string .= 'postal_name, ';
-$query_string .= 'postal_address, ';
-$query_string .= 'manager_name, ';
-$query_string .= 'manager_status, ';
-$query_string .= 'manager_id, ';
-$query_string .= 'manager_mother_name, ';
-$query_string .= 'manager_address, ';
-$query_string .= 'document_holder, ';
-$query_string .= 'document_holder_address ';
+$querystring .= 'price_of_serv_num, ';
+$querystring .= 'price_of_serv_let, ';
+$querystring .= 'company_address, ';
+$querystring .= 'company_register_id, ';
+$querystring .= 'company_tax_id, ';
+$querystring .= 'postal_number, ';
+$querystring .= 'postal_service, ';
+$querystring .= 'postal_name, ';
+$querystring .= 'postal_address, ';
+$querystring .= 'manager_name, ';
+$querystring .= 'manager_status, ';
+$querystring .= 'manager_id, ';
+$querystring .= 'manager_mother_name, ';
+$querystring .= 'manager_address, ';
+$querystring .= 'document_holder, ';
+$querystring .= 'document_holder_address ';
 
-$query_string .= ') VALUES(:company_id,
+$querystring .= ') VALUES(:company_id,
 	:starting_date,
 	:ending_date,
 	:company_phone,
@@ -116,8 +116,8 @@ $query_string .= ') VALUES(:company_id,
 	:document_holder,
 	:document_holder_address)';
 
-$statement2 = $pdo->prepare($query_string);
-$statement2->execute(array(
+$preparedstatement = $pdo->prepare($querystring);
+$preparedstatement->execute(array(
 	'company_id' => $company_id,
 	'starting_date' => $starting_date,
 	'ending_date' => $ending_date,

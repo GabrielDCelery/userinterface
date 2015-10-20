@@ -18,6 +18,34 @@ managerInterface.config(function($routeProvider){
 	})
 })
 
+managerInterface.factory("login", function($http){
+
+	var cachedLoginStatus = false;
+	function checkLoginStatus(callback){
+		if(cachedLoginStatus){
+			callback(true);
+		} else {
+			$http({
+				method:'GET',
+				url: 'login/checklogin.php'
+			}).success(function(data){
+				if(data == "true"){
+					cachedLoginStatus = true;
+					callback(true);
+				} else {
+					cachedLoginStatus = false;
+					callback(false);
+				}
+			})
+		}
+	}
+
+	return {
+		checkLoginStatus: checkLoginStatus
+	}
+
+})
+
 managerInterface.factory("getCompanyNames", function($http){
 
 	var cachedData;
@@ -279,3 +307,54 @@ managerInterface.factory("menuButtons", function(){
 
 })
 
+managerInterface.factory("contract", function($http){
+
+	function createContract(input, callback){
+		$http({
+			method: 'POST',
+			url: 'companies/document_create_contract.php',
+			data: input
+		}).success(function(){
+			callback();
+		})
+	}
+
+	return {
+		createContract: createContract
+	}
+
+})
+
+managerInterface.factory("receit", function($http){
+
+	function filterList(arrayId, arrayObjects){
+
+		var filteredData = [];
+		
+		for(var i = 0; i < arrayId.length; i++){
+			for(var j = 0; j < arrayObjects.length; j++){
+				if(arrayId[i] == arrayObjects[j]["mail_id"]){
+					filteredData.push(arrayObjects[j]);
+				}
+			}
+		}
+
+		return(filteredData);
+	}
+
+	function createReceit(input, callback){
+		$http({
+			method: 'POST',
+			url: 'mailing/document_create_receit.php',
+			data: input
+		}).success(function(){
+			callback();
+		})
+	}
+
+	return {
+		filterList: filterList,
+		createReceit: createReceit
+	}
+
+})

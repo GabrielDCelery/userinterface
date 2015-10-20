@@ -5,9 +5,9 @@ require("../settings.php");
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
 
-$company_name = $request->companyName;
-$starting_date = $request->startingDate;
-$ending_date = $request->endingDate;
+$company_name = $request->company_name;
+$starting_date = $request->starting_date;
+$ending_date = $request->ending_date;
 if(!is_null($starting_date)){
 	$starting_date = strtotime($starting_date);
 	$starting_date = date('Y-m-d', $starting_date);
@@ -16,12 +16,12 @@ if(!is_null($ending_date)){
 	$ending_date = strtotime($ending_date);
 	$ending_date = date('Y-m-d', $ending_date);
 }
-$company_phone = $request->companyPhone;
-$company_email = $request->companyEmail;
-$invoice_number = $request->invoiceNumber;
-$service_provider = $request->serviceProvider;
-$transfer_date = $request->transferDate;
-$invoice_date = $request->invoiceDate;
+$company_phone = $request->company_phone;
+$company_email = $request->company_email;
+$invoice_number = $request->invoice_number;
+$service_provider = $request->service_provider;
+$transfer_date = $request->transfer_date;
+$invoice_date = $request->invoice_date;
 if(!is_null($transfer_date)){
 	$transfer_date = strtotime($transfer_date);
 	$transfer_date = date('Y-m-d', $transfer_date);
@@ -30,77 +30,80 @@ if(!is_null($invoice_date)){
 	$invoice_date = strtotime($invoice_date);
 	$invoice_date = date('Y-m-d', $invoice_date);
 }
-$payment_method = $request->paymentMethod;
-$account_number = $request->accountNumber;
-$price_of_serv_num = $request->priceOfServNum;
-$price_of_serv_let = $request->priceOfServLet;
-$company_address = $request->companyAddress;
-$company_register_id = $request->companyRegisterId;
-$company_tax_id = $request->companyTaxId;
-$postal_number = $request->postalNumber;
+$payment_method = $request->payment_method;
+$account_number = $request->account_number;
+$price_of_serv_num = $request->price_of_serv_num;
+$price_of_serv_let = $request->price_of_serv_let;
+$company_address = $request->company_address;
+$company_register_id = $request->company_register_id;
+$company_tax_id = $request->company_tax_id;
+$postal_number = $request->postal_number;
 
-if($request->postalService == "yes"){
+if($request->postal_service == "yes"){
 	$postal_service = 1;
 } else {
 	$postal_service = 0;
 }
 
-$postal_name = $request->postalName;
-$postal_address = $request->postalAddress;
-$manager_name = $request->managerName;
-$manager_status = $request->managerStatus;
-$manager_id = $request->managerId;
-$manager_mother_name = $request->managerMotherName;
-$manager_address = $request->managerAddress;
-$document_holder = $request->documentHolder;
-$document_holder_address = $request->documentHolderAddress;
+$postal_name = $request->postal_name;
+$postal_address = $request->postal_address;
+$manager_name = $request->manager_name;
+$manager_status = $request->manager_status;
+$manager_id = $request->manager_id;
+$manager_mother_name = $request->manager_mother_name;
+$manager_address = $request->manager_address;
+$document_holder = $request->document_holder;
+$document_holder_address = $request->document_holder_address;
 
-$statement1 = $pdo->prepare('INSERT INTO companies(company_name, contract_status) VALUES(:cname, :cstatus)');
-$statement1->execute(array(
+$q1 = 'INSERT INTO companies(company_name, contract_status) VALUES(:cname, :cstatus)';
+$preparedstatement_1 = $pdo->prepare($q1);
+$preparedstatement_1->execute(array(
 	'cname' => $company_name,
 	'cstatus' => 1
 
 ));
 
-$q1 = 'SELECT id FROM companies WHERE companies.company_name = "' . $company_name . '"';
-$result = $pdo->query($q1);
-$rows = $result->fetchAll(PDO::FETCH_ASSOC);
+$q2 = 'SELECT id FROM companies WHERE companies.company_name = :company_name';
+$preparedstatement_2 = $pdo->prepare($q2);
+$preparedstatement_2->execute(array(
+	'company_name' => $company_name
+));
+$results_2 = $preparedstatement_2->fetchAll(PDO::FETCH_ASSOC);
 
-$company_id = $rows[0]["id"];
+$company_id = $results_2[0]["id"];
 
-$q2 = 'INSERT INTO companies_detailed(';
-$q2 .= 'company_id, ';
-$q2 .= 'starting_date, ';
-$q2 .= 'ending_date, ';
-$q2 .= 'company_phone, ';
-$q2 .= 'company_email, ';
-$q2 .= 'invoice_number, ';
-$q2 .= 'service_provider, ';
+$q3 = 'INSERT INTO companies_detailed(';
+$q3 .= 'company_id, ';
+$q3 .= 'starting_date, ';
+$q3 .= 'ending_date, ';
+$q3 .= 'company_phone, ';
+$q3 .= 'company_email, ';
+$q3 .= 'invoice_number, ';
+$q3 .= 'service_provider, ';
 
-$q2 .= 'transfer_date, ';
-$q2 .= 'invoice_date, ';
-$q2 .= 'payment_method, ';
-$q2 .= 'account_number, ';
+$q3 .= 'transfer_date, ';
+$q3 .= 'invoice_date, ';
+$q3 .= 'payment_method, ';
+$q3 .= 'account_number, ';
 
+$q3 .= 'price_of_serv_num, ';
+$q3 .= 'price_of_serv_let, ';
+$q3 .= 'company_address, ';
+$q3 .= 'company_register_id, ';
+$q3 .= 'company_tax_id, ';
+$q3 .= 'postal_number, ';
+$q3 .= 'postal_service, ';
+$q3 .= 'postal_name, ';
+$q3 .= 'postal_address, ';
+$q3 .= 'manager_name, ';
+$q3 .= 'manager_status, ';
+$q3 .= 'manager_id, ';
+$q3 .= 'manager_mother_name, ';
+$q3 .= 'manager_address, ';
+$q3 .= 'document_holder, ';
+$q3 .= 'document_holder_address ';
 
-$q2 .= 'price_of_serv_num, ';
-$q2 .= 'price_of_serv_let, ';
-$q2 .= 'company_address, ';
-$q2 .= 'company_register_id, ';
-$q2 .= 'company_tax_id, ';
-$q2 .= 'postal_number, ';
-$q2 .= 'postal_service, ';
-$q2 .= 'postal_name, ';
-$q2 .= 'postal_address, ';
-$q2 .= 'manager_name, ';
-$q2 .= 'manager_status, ';
-$q2 .= 'manager_id, ';
-$q2 .= 'manager_mother_name, ';
-$q2 .= 'manager_address, ';
-$q2 .= 'document_holder, ';
-$q2 .= 'document_holder_address ';
-
-$q2 .= ') VALUES(:company_id,
+$q3 .= ') VALUES(:company_id,
 	:starting_date,
 	:ending_date,
 	:company_phone,
@@ -128,8 +131,8 @@ $q2 .= ') VALUES(:company_id,
 	:document_holder,
 	:document_holder_address)';
 
-$statement2 = $pdo->prepare($q2);
-$statement2->execute(array(
+$preparedstatement_3 = $pdo->prepare($q3);
+$preparedstatement_3->execute(array(
 	'company_id' => $company_id,
 	'starting_date' => $starting_date,
 	'ending_date' => $ending_date,

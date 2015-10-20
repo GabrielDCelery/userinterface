@@ -1,31 +1,70 @@
+<div class="wrapper flex" ng-if="showContent">
+
 <!-- MAIN MENU -->
-		<ul class="menu">
-			<li class="menu-blue">
-				<a href="#/companies">
-					<img src="images/svg-contract.svg">
-					<p>CONTRACTS</p>
-				</a>
-			</li>
-			<li class="menu-blue">
-				<a href="#/mailing">
-					<img src="images/svg-mail.svg">
-					<p>MAILING</p>
-				</a>
-			</li>
-			<li class="menu-blue">
-				<a href="">
-					<img src="images/svg-invoice.svg">
-					<p>INVOICES</p>
-				</a>
-			</li>
-			<li class="menu-black">
-				<a ng-click="logout()">
-					<img src="images/svg-power.svg">
-					<p>LOGOUT</p>
-				</a>
-			</li>
-		</ul>
+	<ul class="menu">
+		<li class="menu-blue">
+			<a href="#/companies">
+				<img src="images/svg-contract.svg">
+				<p>CONTRACTS</p>
+			</a>
+		</li>
+		<li class="menu-blue">
+			<a href="#/mailing">
+				<img src="images/svg-mail.svg">
+				<p>MAILING</p>
+			</a>
+		</li>
+		<li class="menu-blue">
+			<a href="">
+				<img src="images/svg-invoice.svg">
+				<p>INVOICES</p>
+			</a>
+		</li>
+		<li class="menu-black">
+			<a ng-click="logout()">
+				<img src="images/svg-power.svg">
+				<p>LOGOUT</p>
+			</a>
+		</li>
+	</ul>
 <!-- main menu END -->
+
+<!-- MAIN MENU FEATURES -->
+	<ul class="menu-features">
+		<li class="menu-red" ng-show="display.menu.searchMails">
+			<a ng-click="searchMailsButton()">
+				<img src="images/svg-search.svg">
+				<p>SEARCH</p>
+			</a>
+		</li>
+		<li class="menu-purple" ng-show="display.menu.forwardMails">
+			<a ng-click="forwardMailsButton()">
+				<img src="images/svg-forwardmail.svg">
+				<p>FORWARD MAILS</p>
+			</a>
+		</li>
+		<li class="menu-yellow" ng-show="display.menu.editMails">
+			<a ng-click="editMailsButton()">
+				<img src="images/svg-editmail.svg">
+				<p>EDIT MAILS</p>
+			</a>
+		</li>
+		<li class="menu-green" ng-show="display.menu.addNewMails">
+			<a ng-click="addNewMailsButton()">
+				<img src="images/svg-addmail.svg">
+				<p>ADD NEW</p>
+			</a>
+		</li>
+		<li class="menu-black" ng-show="display.menu.reset">
+			<a ng-click="resetDataButton()">
+				<img src="images/svg-undo.svg">
+				<p>RESET</p>
+			</a>
+		</li>
+	</ul>
+<!-- main menu features END -->
+
+
 <div class="container-dynamic-content">
 
 	<!-- SEARCH MAILS -->
@@ -92,7 +131,7 @@
 			<button ng-click="formForwardMails()">SAVE INTO DATABASE FOR SELECTED</button>
 		</li>
 		<li class="col-13-25">
-			<button>PRINT FORM FOR SELECTED</button>
+			<button ng-click="printReceit()">PRINT FORM FOR SELECTED</button>
 		</li>
 	</ul>
 	<!-- forwarding mails END -->
@@ -213,40 +252,6 @@
 			<input type="text" ng-model="mail.forwarding_method" ng-show="mail.show_input">
 		</li>
 	</ul><!-- mail shortlist END-->
+</div>
 
-
-	<!-- MAIN MENU FEATURES -->
-	<ul class="menu-features">
-		<li class="menu-red" ng-show="display.menu.searchMails">
-			<a ng-click="searchMailsButton()">
-				<img src="images/svg-search.svg">
-				<p>SEARCH</p>
-			</a>
-		</li>
-		<li class="menu-purple" ng-show="display.menu.forwardMails">
-			<a ng-click="forwardMailsButton()">
-				<img src="images/svg-forwardmail.svg">
-				<p>FORWARD MAILS</p>
-			</a>
-		</li>
-		<li class="menu-yellow" ng-show="display.menu.editMails">
-			<a ng-click="editMailsButton()">
-				<img src="images/svg-editmail.svg">
-				<p>EDIT MAILS</p>
-			</a>
-		</li>
-		<li class="menu-green" ng-show="display.menu.addNewMails">
-			<a ng-click="addNewMailsButton()">
-				<img src="images/svg-addmail.svg">
-				<p>ADD NEW</p>
-			</a>
-		</li>
-		<li class="menu-black" ng-show="display.menu.reset">
-			<a ng-click="resetDataButton()">
-				<img src="images/svg-undo.svg">
-				<p>RESET</p>
-			</a>
-		</li>
-	</ul>
-	<!-- main menu features END -->
 </div>

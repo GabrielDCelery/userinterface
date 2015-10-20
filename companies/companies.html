@@ -1,31 +1,67 @@
+<div class="wrapper flex" ng-if="showContent">
 <!-- MAIN MENU -->
-		<ul class="menu">
-			<li class="menu-blue">
-				<a href="#/companies">
-					<img src="images/svg-contract.svg">
-					<p>CONTRACTS</p>
-				</a>
-			</li>
-			<li class="menu-blue">
-				<a href="#/mailing">
-					<img src="images/svg-mail.svg">
-					<p>MAILING</p>
-				</a>
-			</li>
-			<li class="menu-blue">
-				<a href="">
-					<img src="images/svg-invoice.svg">
-					<p>INVOICES</p>
-				</a>
-			</li>
-			<li class="menu-black">
-				<a ng-click="logout()">
-					<img src="images/svg-power.svg">
-					<p>LOGOUT</p>
-				</a>
-			</li>
-		</ul>
+	<ul class="menu">
+		<li class="menu-blue">
+			<a href="#/companies">
+				<img src="images/svg-contract.svg">
+				<p>CONTRACTS</p>
+			</a>
+		</li>
+		<li class="menu-blue">
+			<a href="#/mailing">
+				<img src="images/svg-mail.svg">
+				<p>MAILING</p>
+			</a>
+		</li>
+		<li class="menu-blue">
+			<a href="">
+				<img src="images/svg-invoice.svg">
+				<p>INVOICES</p>
+			</a>
+		</li>
+		<li class="menu-black">
+			<a ng-click="logout()">
+				<img src="images/svg-power.svg">
+				<p>LOGOUT</p>
+			</a>
+		</li>
+	</ul>
 <!-- main menu END -->
+
+<!-- MAIN MENU FEATURES -->
+	<ul class="menu-features">
+		<li class="menu-red"  ng-show="display.menu.searchCompany">
+			<a ng-click="searchCompanyButton()">
+				<img src="images/svg-search.svg">
+				<p>SEARCH</p>
+			</a>
+		</li>
+		<li class="menu-purple" ng-show="display.menu.sendEmail">
+			<a ng-click="sendEmailButton()">
+				<img src="images/svg-email.svg">
+				<p>EMAIL</p>
+			</a>
+		</li>
+		<li class="menu-yellow" ng-show="display.menu.showDetails">
+			<a ng-click="showDetailsButton()">
+				<img src="images/svg-detailed.svg">
+				<p>DETAILS</p>
+			</a>
+		</li>
+		<li class="menu-green" ng-show="display.menu.addNewCompany">
+			<a ng-click="addNewCompanyButton()">
+				<img src="images/svg-addcompany.svg">
+				<p>ADD NEW</p>
+			</a>
+		</li>
+		<li class="menu-black" ng-show="display.menu.reset">
+			<a ng-click="resetDataButton()">
+				<img src="images/svg-undo.svg">
+				<p>RESET</p>
+			</a>
+		</li>
+	</ul>
+<!-- main menu features END -->
 
 <div class="container-dynamic-content">
 
@@ -116,76 +152,76 @@
 	<!-- ADD COMPANY -->
 	<ul class="menu-input" ng-show="display.form.addNewCompany">
 		<li class="col-4-25 menu-green">COMPANY NAME</li>
-		<li class="col-6-25"><input type="text" ng-model="addNewCompany.companyName" value="{{addNewCompany.companyName}}"></li>
+		<li class="col-6-25"><input type="text" ng-model="addNewCompany.company_name"></li>
 		<li class="col-4-25 menu-green">STARTING DATE</li>
-		<li class="col-4-25"><input type="date" ng-model="addNewCompany.startingDate"></li>
+		<li class="col-4-25"><input type="date" ng-model="addNewCompany.starting_date"></li>
 		<li class="col-3-25 menu-green">ENDING DATE</li>
-		<li class="col-4-25"><input type="date" ng-model="addNewCompany.endingDate"></li>
+		<li class="col-4-25"><input type="date" ng-model="addNewCompany.ending_date"></li>
 
 		<li class="col-4-25 menu-green">PHONE NUMBER</li>
-		<li class="col-6-25"><input type="text" ng-model="addNewCompany.companyPhone"></li>
+		<li class="col-6-25"><input type="text" ng-model="addNewCompany.company_phone"></li>
 		<li class="col-4-25 menu-green">EMAIL</li>
-		<li class="col-11-25"><input type="email" ng-model="addNewCompany.companyEmail"></li>
+		<li class="col-11-25"><input type="email" ng-model="addNewCompany.company_email"></li>
 
 		<li class="col-4-25 menu-green">INVOICE NUMBER</li>
-		<li class="col-6-25"><input type="text" ng-model="addNewCompany.invoiceNumber"></li>		
+		<li class="col-6-25"><input type="text" ng-model="addNewCompany.invoice_number"></li>		
 		<li class="col-4-25 menu-green">SERVICE PROVIDER</li>
-		<li class="col-11-25"><select ng-model="addNewCompany.serviceProvider"><option>Zeller és Zeller Kft.</option><option>World Top Sport Bt.</option></select></li>
+		<li class="col-11-25"><select ng-model="addNewCompany.service_provider"><option>Zeller és Zeller Kft.</option><option>World Top Sport Bt.</option></select></li>
 
 		<li class="col-4-25 menu-green">TRANSFER DATE</li>
-		<li class="col-6-25"><input type="date" ng-model="addNewCompany.transferDate"></li>
+		<li class="col-6-25"><input type="date" ng-model="addNewCompany.transfer_date"></li>
 		<li class="col-4-25 menu-green">INVOICE DATE</li>
-		<li class="col-11-25"><input type="date" ng-model="addNewCompany.invoiceDate"></li>
+		<li class="col-11-25"><input type="date" ng-model="addNewCompany.invoice_date"></li>
 		<li class="col-4-25 menu-green">PAYMENT METH.</li>
-		<li class="col-6-25"><select ng-model="addNewCompany.paymentMethod"><option>cash</option><option>money transfer</option></select>
+		<li class="col-6-25"><select ng-model="addNewCompany.payment_method"><option>cash</option><option>money transfer</option></select>
 		<li class="col-4-25 menu-green">ACCOUNT NUM.</li>
-		<li class="col-11-25"><input type="text" ng-model="addNewCompany.accountNumber"></li>
+		<li class="col-11-25"><input type="text" ng-model="addNewCompany.account_number"></li>
 
 		<li class="col-4-25 menu-green">PRICE OF SERV. (NUM)</li>
-		<li class="col-6-25"><input type="number" ng-model="addNewCompany.priceOfServNum"></li>		
+		<li class="col-6-25"><input type="number" ng-model="addNewCompany.price_of_serv_num"></li>		
 		<li class="col-4-25 menu-green">PRICE OF SERV. (LET)</li>
-		<li class="col-11-25"><input type="text" ng-model="addNewCompany.priceOfServLet"></li>	
+		<li class="col-11-25"><input type="text" ng-model="addNewCompany.price_of_serv_let"></li>	
 
 		<li class="col-4-25 menu-green">COMPANY ADDRESS</li>
-		<li class="col-6-25"><input type="text" ng-model="addNewCompany.companyAddress"></li>	
+		<li class="col-6-25"><input type="text" ng-model="addNewCompany.company_address"></li>	
 		<li class="col-4-25 menu-green">COMPANY ID</li>
-		<li class="col-4-25"><input type="text" ng-model="addNewCompany.companyRegisterId"></li>		
+		<li class="col-4-25"><input type="text" ng-model="addNewCompany.company_register_id"></li>		
 		<li class="col-3-25 menu-green">TAX ID</li>
-		<li class="col-4-25"><input type="text" ng-model="addNewCompany.companyTaxId"></li>	
+		<li class="col-4-25"><input type="text" ng-model="addNewCompany.company_tax_id"></li>	
 
 		<li class="col-4-25 menu-green">POSTAL NUMBER</li>
-		<li class="col-6-25"><input type="text" ng-model="addNewCompany.postalNumber"></li>
+		<li class="col-6-25"><input type="text" ng-model="addNewCompany.postal_number"></li>
 		<li class="col-4-25 menu-green">POSTAL SERVICE</li>
 		<li class="col-11-25">
-			<select ng-model="addNewCompany.postalService">
+			<select ng-model="addNewCompany.postal_service">
 				<option>yes</option>
 				<option>no</option>
 			</select>
 		</li>
 		<li class="col-4-25 menu-green">POSTAL NAME</li>
-		<li class="col-6-25"><input type="text" ng-model="addNewCompany.postalName"></li>		
+		<li class="col-6-25"><input type="text" ng-model="addNewCompany.postal_name"></li>		
 		<li class="col-4-25 menu-green">POSTAL ADDRESS</li>
-		<li class="col-11-25"><input type="text" ng-model="addNewCompany.postalAddress"></li>	
+		<li class="col-11-25"><input type="text" ng-model="addNewCompany.postal_address"></li>	
 
 		<li class="col-4-25 menu-green">MANAGER NAME</li>
-		<li class="col-6-25"><input type="text" ng-model="addNewCompany.managerName"></li>	
+		<li class="col-6-25"><input type="text" ng-model="addNewCompany.manager_name"></li>	
 		<li class="col-4-25 menu-green">MANAG. STATUS</li>
-		<li class="col-4-25"><select ng-model="addNewCompany.managerStatus"><option>manager</option><option>commissioned</option></select></li>
+		<li class="col-4-25"><select ng-model="addNewCompany.manager_status"><option>manager</option><option>commissioned</option></select></li>
 		<li class="col-3-25 menu-green">MANAG. ID</li>
-		<li class="col-4-25"><input type="text" ng-model="addNewCompany.managerId"></li>
+		<li class="col-4-25"><input type="text" ng-model="addNewCompany.manager_id"></li>
 
 		<li class="col-4-25 menu-green">MAN. MOTHER'S NAME</li>
-		<li class="col-6-25"><input type="text" ng-model="addNewCompany.managerMotherName"></li>		
+		<li class="col-6-25"><input type="text" ng-model="addNewCompany.manager_mother_name"></li>		
 		<li class="col-4-25 menu-green">MANAGER ADDRESS</li>
-		<li class="col-11-25"><input type="text" ng-model="addNewCompany.managerAddress"></li>
+		<li class="col-11-25"><input type="text" ng-model="addNewCompany.manager_address"></li>
 
 		<li class="col-4-25 menu-green">DOCUMENTS HOLDER</li>
-		<li class="col-6-25"><input type="text" ng-model="addNewCompany.documentHolder"></li>		
+		<li class="col-6-25"><input type="text" ng-model="addNewCompany.document_holder"></li>		
 		<li class="col-4-25 menu-green">DOCUMENTS ADDRESS</li>
-		<li class="col-11-25"><input type="text" ng-model="addNewCompany.documentHolderAddress"></li>
+		<li class="col-11-25"><input type="text" ng-model="addNewCompany.document_holder_address"></li>
 
 		<li class="col-14-25 menu-green"><button ng-click="formAddNewCompany()">SAVE INTO DATABASE</button></li>
-		<li class="col-11-25 menu-green"><button>PRINT CONTRACT</button></li>
+		<li class="col-11-25 menu-green"><button ng-click="newContract(addNewCompany)">PRINT CONTRACT</button></li>
 	</ul>
 	<!-- add company END -->
 	<!-- menu input END -->
@@ -441,7 +477,7 @@
 				<button ng-click="resetCompanyDetailedForm()">CANCEL</button>
 			</li>
 			<li class="col-7-25" ng-class="{green:'data-green', yellow:'data-yellow', red:'data-red'}[companyDetailed.css_color]">
-				<button>PRINT CONTRACT</button>
+				<button ng-click="existingContract(companyDetailed)">PRINT CONTRACT</button>
 			</li>
 		</ul>
 	</div>
@@ -673,45 +709,11 @@
 				<button ng-click="resetCompanyExtendForm()">CANCEL</button>
 			</li>
 			<li class="col-7-25" ng-class="{green:'data-green', yellow:'data-yellow', red:'data-red'}[companyDetailed.css_color]">
-				<button>PRINT CONTRACT</button>
+				<button ng-click="existingContract(companyDetailed)">PRINT CONTRACT</button>
 			</li>
 		</ul>
 	</div>
 	<!-- extending contract form END -->
+</div>
 
-
-	<!-- MAIN MENU FEATURES -->
-	<ul class="menu-features">
-		<li class="menu-red"  ng-show="display.menu.searchCompany">
-			<a ng-click="searchCompanyButton()">
-				<img src="images/svg-search.svg">
-				<p>SEARCH</p>
-			</a>
-		</li>
-		<li class="menu-purple" ng-show="display.menu.sendEmail">
-			<a ng-click="sendEmailButton()">
-				<img src="images/svg-email.svg">
-				<p>EMAIL</p>
-			</a>
-		</li>
-		<li class="menu-yellow" ng-show="display.menu.showDetails">
-			<a ng-click="showDetailsButton()">
-				<img src="images/svg-detailed.svg">
-				<p>DETAILS</p>
-			</a>
-		</li>
-		<li class="menu-green" ng-show="display.menu.addNewCompany">
-			<a ng-click="addNewCompanyButton()">
-				<img src="images/svg-addcompany.svg">
-				<p>ADD NEW</p>
-			</a>
-		</li>
-		<li class="menu-black" ng-show="display.menu.reset">
-			<a ng-click="resetDataButton()">
-				<img src="images/svg-undo.svg">
-				<p>RESET</p>
-			</a>
-		</li>
-	</ul>
-	<!-- main menu features END -->
 </div>

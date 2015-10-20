@@ -1,4 +1,13 @@
-managerInterface.controller('mailingCtrl', function($scope, $http, $window, getCompanyNames, getMailingAddresses, mailFunctions, menuButtons){
+managerInterface.controller('mailingCtrl', function($scope, $http, $window, login, getCompanyNames, getMailingAddresses, mailFunctions, menuButtons, receit){
+
+
+login.checkLoginStatus(function(data){
+	if(data){
+		$scope.showContent = data;
+	} else {
+		$window.location.href = '';
+	}
+});
 
 /***********************************************************************************
 Variables and objects
@@ -174,6 +183,7 @@ Search database for mails and list the results
 
 	$scope.formSearchMails = function(){
 
+		$scope.display.form.searchMails = false;
 		$scope.display.menu.forwardMails = true;
 		$scope.display.menu.editMails = true;
 		$scope.display.data.mailsShortlist = true;
@@ -288,6 +298,16 @@ Forward mails functions
 		}
 	}
 
+	$scope.printReceit = function(){
+
+		var filteredData = receit.filterList($scope.selectedMails.id, $scope.mailsShortList);
+
+		receit.createReceit(filteredData, function(){
+			window.location.replace("mailing/receit.docx");
+		})
+		
+	}
+
 /***********************************************************************************
 Adding new mails functions
 ***********************************************************************************/
@@ -395,6 +415,5 @@ Reset data and display functions
 	$scope.resetDisplay = function(){
 		$scope.display = angular.copy($scope.displayMaster);
 	}
-
 
 })

@@ -1,5 +1,26 @@
 
-managerInterface.controller('companiesCtrl', function($scope, $http, $window, getCompanyNames, getManagerNames, companyFunctions, menuButtons){
+managerInterface.controller('companiesCtrl', function($scope, $http, $window, login, getCompanyNames, getManagerNames, companyFunctions, menuButtons, contract){
+
+	login.checkLoginStatus(function(data){
+		if(data){
+			$scope.showContent = data;
+		} else {
+			$window.location.href = '';
+		}
+	});
+
+/***********************************************************************************
+Logout
+***********************************************************************************/
+
+	$scope.logout = function(){
+		$http({
+			method:'GET',
+			url: 'login/logout.php'
+		}).success(function(data){
+			$window.location.href = '';
+		})
+	}
 
 /***********************************************************************************
 Variables and objects
@@ -41,34 +62,35 @@ Variables and objects
 	}
 
 /* Form for adding new company */
+
 	$scope.addNewCompany = {
-		companyName: "",
-		startingDate: new Date(),
-		endingDate: new Date(),
-		companyPhone: "",
-		companyEmail: "",
-		invoiceNumber: "",
-		serviceProvider: "Zeller és Zeller Kft.",
-		transferDate: new Date(),
-		invoiceDate: new Date(),
-		paymentMethod: "cash",
-		accountNumber: "",
-		priceOfServNum: 0,
-		priceOfServLet: "",
-		companyAddress: "",
-		companyRegisterId: "",
-		companyTaxId: "",
-		postalNumber: "",
-		postalService: "yes",
-		postalName: "",
-		postalAddress: "",
-		managerName: "",
-		managerStatus: "manager",
-		managerId: "",
-		managerMotherName: "",
-		managerAddress: "",
-		documentHolder: "",
-		documentHolderAddress: "",
+		company_name: "",
+		starting_date: new Date(),
+		ending_date: new Date(),
+		company_phone: "",
+		company_email: "",
+		invoice_number: "",
+		service_provider: "Zeller és Zeller Kft.",
+		transfer_date: new Date(),
+		invoice_date: new Date(),
+		payment_method: "cash",
+		account_number: "",
+		price_of_serv_num: 0,
+		price_of_serv_let: "",
+		company_address: "",
+		company_register_id: "",
+		company_tax_id: "",
+		postal_number: "",
+		postal_service: "yes",
+		postal_name: "",
+		postal_address: "",
+		manager_name: "",
+		manager_status: "manager",
+		manager_id: "",
+		manager_mother_name: "",
+		manager_address: "",
+		document_holder: "",
+		document_holder_address: "",
 	}
 
 /* Variable holding the data which email you are sending to comapnies */
@@ -116,6 +138,7 @@ Menu button functions
 	$scope.addNewCompanyButton = function(){
 		menuButtons.changeFormDisplay("addNewCompany", $scope.display.form, function(data){
 			$scope.display.form = data;
+			
 		})
 	}
 
@@ -326,15 +349,18 @@ Add new company to database
 	}
 
 /***********************************************************************************
-Logout
+Print Contract
 ***********************************************************************************/
+	
+	$scope.newContract = function(input){
+		contract.createContract(input, function(){
+			window.location.replace("companies/contract.docx");
+		})
+	}
 
-	$scope.logout = function(){
-		$http({
-			method:'GET',
-			url: 'login/logout.php'
-		}).success(function(data){
-			$window.location.href = '';
+	$scope.existingContract = function(input){
+		contract.createContract(input, function(){
+			window.location.replace("companies/contract.docx");
 		})
 	}
 
