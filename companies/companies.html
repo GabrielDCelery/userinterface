@@ -48,6 +48,12 @@
 				<p>DETAILS</p>
 			</a>
 		</li>
+		<li class="menu-cyan" ng-show="display.menu.extendContract">
+			<a ng-click="extendContractButton()">
+				<img src="images/svg-extend.svg">
+				<p>EXTEND</p>
+			</a>
+		</li>
 		<li class="menu-green" ng-show="display.menu.addNewCompany">
 			<a ng-click="addNewCompanyButton()">
 				<img src="images/svg-addcompany.svg">
@@ -137,13 +143,18 @@
 
 	<!-- SHOW DETAILED OF SELECTED -->
 	<ul class="menu-input menu-yellow" ng-show="display.form.showDetails">
-		<li class="col-9-25">
-			<button ng-click="formListDetailedCompaniesInfo()">SHOW DETAILES OF SELECTED</buton>
+		<li class="col-25-25">
+			<button ng-click="formListDetailedCompaniesInfo()">SHOW DETAILS OF SELECTED</buton>
 		</li>
-		<li class="col-8-25">
+	</ul>
+	<!-- show detailed of selected END -->
+
+	<!-- SHOW DETAILED OF SELECTED -->
+	<ul class="menu-input menu-cyan" ng-show="display.form.extendContract">
+		<li class="col-12-25">
 			<button ng-click="formChangeContractStatus()">CHANGE STATUS OF SELECTED</buton>
 		</li>
-		<li class="col-8-25">
+		<li class="col-13-25">
 			<button ng-click="formExtendContract()">EXTEND CONTRACT OF SELECTED</buton>
 		</li>
 	</ul>

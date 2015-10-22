@@ -32,6 +32,7 @@ Variables and objects
 			searchCompany: true,
 			sendEmail: false,
 			showDetails: false,
+			extendContract: false,
 			addNewCompany: true,
 			reset: true
 		},
@@ -40,6 +41,7 @@ Variables and objects
 			searchCompany: false,
 			sendEmail: false,
 			showDetails: false,
+			extendContract: false,
 			addNewCompany: false
 		},
 
@@ -135,6 +137,12 @@ Menu button functions
 		})
 	}
 
+	$scope.extendContractButton = function(){
+		menuButtons.changeFormDisplay("extendContract", $scope.display.form, function(data){
+			$scope.display.form = data;
+		})
+	}
+
 	$scope.addNewCompanyButton = function(){
 		menuButtons.changeFormDisplay("addNewCompany", $scope.display.form, function(data){
 			$scope.display.form = data;
@@ -187,6 +195,7 @@ Search database for short company data
 		$scope.display.form.searchCompany = false;
 		$scope.display.menu.sendEmail = true;
 		$scope.display.menu.showDetails = true;
+		$scope.display.menu.extendContract = true;
 		$scope.display.data.companiesShortList = true;
 		$scope.display.data.companiesDetailed = false;
 		$scope.display.data.companiesExtendContract = false;

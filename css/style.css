@@ -171,6 +171,7 @@ MENU COLORS
 .menu-red,
 .menu-green,
 .menu-yellow,
+.meun-cyan,
 .menu-purple {
     color: #fff;
     box-shadow:0 2px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
@@ -183,6 +184,10 @@ MENU COLORS
 
 .menu-blue {
 	background-image: radial-gradient(#4096C1, #0A4EB3);
+}
+
+.menu-cyan {
+	background-image: radial-gradient(#30B0A3, #26706B);
 }
 
 .menu-red {
