@@ -240,7 +240,6 @@ FORM - DETAILS
 
 	$scope.formListDetailedCompaniesInfo = function (){
 		$scope.companiesDetailed = {};
-		$scope.display.data.companiesDetailed = true;
 		$scope.display.data.companiesExtendContract = false;
 		if($scope.selectedCompanies.id.length == 0){
 			alert($scope.language.companies.alert.checklistempty);
@@ -254,6 +253,7 @@ FORM - DETAILS
 					companyFunctions.addColourCoding().formatDateCorrectly().formatPostalServiceToString();
 					$scope.companiesDetailed = companyFunctions.data;
 					$scope.companiesDetailedMaster = angular.copy($scope.companiesDetailed);
+					$scope.display.data.companiesDetailed = true;
 				})
 		}
 	}
@@ -310,7 +310,6 @@ FORM - EXTEND
 		$scope.companyDataForExtendingContract = {};
 
 		$scope.display.data.companiesDetailed = false;
-		$scope.display.data.companiesExtendContract = true;
 
 		if($scope.selectedCompanies.id.length == 0){
 			alert($scope.language.companies.alert.checklistempty);
@@ -326,6 +325,7 @@ FORM - EXTEND
 					companyFunctions.addColourCoding().formatDateCorrectly().formatPostalServiceToString();
 					$scope.companyDataForExtendingContract = companyFunctions.data;
 					$scope.companyDataForExtendingContractMaster = angular.copy($scope.companyDataForExtendingContract);
+					$scope.display.data.companiesExtendContract = true;
 				}
 			)
 		}
@@ -368,6 +368,17 @@ FORM - ADD NEW
 			}
 		)
 
+	}
+
+
+/***********************************************************************************
+OVERLAY FUNCTIONS
+***********************************************************************************/
+
+	$scope.closeOverlay = function(){
+		$scope.display.data.companiesDetailed = false;
+		$scope.display.data.companiesExtendContract = false;
+		$scope.display.form.addNewCompany = false;
 	}
 
 /***********************************************************************************
