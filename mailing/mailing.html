@@ -5,25 +5,25 @@
 		<li class="menu-blue">
 			<a href="#/companies">
 				<img src="images/svg-contract.svg">
-				<p>CONTRACTS</p>
+				<p>{{language.mailing.menu.contract}}</p>
 			</a>
 		</li>
 		<li class="menu-blue">
 			<a href="#/mailing">
 				<img src="images/svg-mail.svg">
-				<p>MAILING</p>
+				<p>{{language.mailing.menu.mailing}}</p>
 			</a>
 		</li>
 		<li class="menu-blue">
 			<a href="">
 				<img src="images/svg-invoice.svg">
-				<p>INVOICES</p>
+				<p>{{language.mailing.menu.invoices}}</p>
 			</a>
 		</li>
 		<li class="menu-black">
 			<a ng-click="logout()">
 				<img src="images/svg-power.svg">
-				<p>LOGOUT</p>
+				<p>{{language.mailing.menu.logout}}</p>
 			</a>
 		</li>
 	</ul>
@@ -34,31 +34,31 @@
 		<li class="menu-red" ng-show="display.menu.searchMails">
 			<a ng-click="searchMailsButton()">
 				<img src="images/svg-search.svg">
-				<p>SEARCH</p>
+				<p>{{language.mailing.submenu.search}}</p>
 			</a>
 		</li>
 		<li class="menu-purple" ng-show="display.menu.forwardMails">
 			<a ng-click="forwardMailsButton()">
 				<img src="images/svg-forwardmail.svg">
-				<p>FORWARD MAILS</p>
+				<p>{{language.mailing.submenu.forwardmails}}</p>
 			</a>
 		</li>
 		<li class="menu-yellow" ng-show="display.menu.editMails">
 			<a ng-click="editMailsButton()">
 				<img src="images/svg-editmail.svg">
-				<p>EDIT MAILS</p>
+				<p>{{language.mailing.submenu.editmails}}</p>
 			</a>
 		</li>
 		<li class="menu-green" ng-show="display.menu.addNewMails">
 			<a ng-click="addNewMailsButton()">
 				<img src="images/svg-addmail.svg">
-				<p>ADD NEW</p>
+				<p>{{language.mailing.submenu.addnew}}</p>
 			</a>
 		</li>
 		<li class="menu-black" ng-show="display.menu.reset">
 			<a ng-click="resetDataButton()">
 				<img src="images/svg-undo.svg">
-				<p>RESET</p>
+				<p>{{language.mailing.submenu.reset}}</p>
 			</a>
 		</li>
 	</ul>
@@ -70,13 +70,13 @@
 	<!-- SEARCH MAILS -->
 	<ul class="menu-input menu-red" ng-show="display.form.searchMails">
 		<li class="col-4-25">
-			COMPANY NAME
+			{{language.mailing.form.search.companyname}}
 		</li>
 		<li class="col-7-25">
 			<input type="text" ng-model="formForSearchingMailData.companyName" ng-keyup="filterListOfCompanyNamesSearch()">
 		</li>
 		<li class="col-4-25">
-			DATE INTERVAL
+			{{language.mailing.form.search.dateinterval}}
 		</li>
 		<li class="col-5-25">
 			<input type="date" ng-model="formForSearchingMailData.startingDate">
@@ -86,19 +86,19 @@
 		</li>
 		<li class="col-6-25">
 			<input type="checkbox" ng-model="formForSearchingMailData.nonForwarded">
-			NON-FORWARDED
+			{{language.mailing.form.search.nonforwarded}}
 		</li>
 		<li class="col-6-25">
 			<input type="checkbox" ng-model="formForSearchingMailData.forwarded">
-			FORWARDED
+			{{language.mailing.form.search.forwarded}}
 		</li>
 		<li class="col-6-25">
 			<input type="checkbox" ng-model="formForSearchingMailData.hasPostalService">
-			HAS POSTAL SERVICE
+			{{language.mailing.form.search.haspostalservice}}
 		</li>
 		<li class="col-7-25">
 			<input type="checkbox" ng-model="formForSearchingMailData.doesntHavePoastalService">
-			DOESN'T HAVE POSTAL SERVICE
+			{{language.mailing.form.search.doesnthavepostalservice}}
 		</li>
 		<li class="col-25-25">
 			<button ng-click="formSearchMails()">LIST EMAILS</button>
@@ -116,22 +116,22 @@
 	<!-- FORWARDING MAILS -->
 	<ul class="menu-input menu-purple" ng-show="display.form.forwardMails">
 		<li class="col-4-25">
-			FORW. DATE
+			{{language.mailing.form.forward.forwarddate}}
 		</li>
 		<li class="col-8-25">
 			<input type="date" ng-model="formForForwardingMails.forwardingDate">
 		</li>
 		<li class="col-4-25">
-			FORW. METHOD
+			{{language.mailing.form.forward.forwardmethod}}
 		</li>
 		<li class="col-9-25">
 			<input type="text" ng-model="formForForwardingMails.forwardingMethod">
 		</li>
 		<li class="col-12-25">
-			<button ng-click="formForwardMails()">SAVE INTO DATABASE FOR SELECTED</button>
+			<button ng-click="formForwardMails()">{{language.mailing.form.forward.saveintodatabase}}</button>
 		</li>
 		<li class="col-13-25">
-			<button ng-click="printReceit()">PRINT FORM FOR SELECTED</button>
+			<button ng-click="printReceit()">{{language.mailing.form.forward.printform}}</button>
 		</li>
 	</ul>
 	<!-- forwarding mails END -->
@@ -139,16 +139,16 @@
 	<!-- EDIT SELECTED MAILS -->
 	<ul class="menu-input menu-yellow" ng-show="display.form.editMails">
 		<li class="col-6-25">
-			<button ng-click="editMailData()">EDIT SELECTED</buton>
+			<button ng-click="editMailData()">{{language.mailing.form.edit.editselected}}</buton>
 		</li>
 		<li class="col-5-25">
-			<button ng-click="resetMailData()">CANCEL</buton>
+			<button ng-click="resetMailData()">{{language.mailing.form.edit.cancel}}</buton>
 		</li>
 		<li class="col-7-25">
-			<button ng-click="formOverWriteMails()">SAVE INTO DATABASE</buton>
+			<button ng-click="formOverWriteMails()">{{language.mailing.form.edit.saveintodatabase}}</buton>
 		</li>
 		<li class="col-7-25">
-			<button ng-click="formDeleteMails()">DELETE SELECTED</buton>
+			<button ng-click="formDeleteMails()">{{language.mailing.form.edit.deleteselected}}</buton>
 		</li>
 	</ul>
 	<!-- edit selected mails END -->
@@ -156,13 +156,13 @@
 	<!-- ADD MAILS-->
 	<ul class="menu-input menu-green" ng-show="display.form.addNewMails">
 		<li class="col-4-25">
-			COMPANY NAME
+			{{language.mailing.form.addnew.companyname}}
 		</li>
 		<li class="col-8-25">
 			<input type="text" ng-model="formForAddingNewMails.companyName"  ng-keyup="filterListOfCompanyNamesAddNew()">
 		</li>
 		<li class="col-4-25">
-			DATE
+			{{language.mailing.form.addnew.date}}
 		</li>
 		<li class="col-9-25">
 			<input type="date" ng-model="formForAddingNewMails.receivingDate">
@@ -170,13 +170,13 @@
 	</ul>
 	<ul class="menu-input menu-green" ng-show="display.form.addNewMails" ng-repeat="newMail in formForAddingNewMails.mails">
 		<li class="col-4-25">
-			SENDER NAME
+			{{language.mailing.form.addnew.sendername}}
 		</li>
 		<li class="col-7-25">
 			<input type="text" ng-model="newMail.senderName" ng-keyup="filterListOfMailingAddresses(newMail)">
 		</li>
 		<li class="col-4-25">
-			SENDER ADDRESS
+			{{language.mailing.form.addnew.senderaddress}}
 		</li>
 		<li class="col-8-25">
 			<input type="text" ng-model="newMail.senderAddress" ng-keyup="filterListOfMailingAddresses(newMail)">
@@ -194,7 +194,7 @@
 	</ul>
 	<ul class="menu-input menu-green" ng-show="display.form.addNewMails">
 		<li class="col-25-25">
-			<button ng-click="formAddNewMails()">ADD MAILS</button>
+			<button ng-click="formAddNewMails()">{{language.mailing.form.addnew.addmails}}</button>
 		</li>
 	</ul>
 	<!-- add mails END -->
@@ -216,12 +216,24 @@
 		<li class="col-1-25">
 			<input type="checkbox" ng-click="checkAll()">
 		</li>
-		<li class="col-4-25" ng-click = "sortListedMailingData = 'company_name'; reverseListedMailingData = !reverseListedMailingData">COMPANY NAME</li>
-		<li class="col-4-25" ng-click = "sortListedMailingData = 'sender_name'; reverseListedMailingData = !reverseListedMailingData">SENDER NAME</li>
-		<li class="col-6-25" ng-click = "sortListedMailingData = 'sender_address'; reverseListedMailingData = !reverseListedMailingData">SENDER ADDRESS</li>
-		<li class="col-3-25" ng-click = "sortListedMailingData = 'receiving_date'; reverseListedMailingData = !reverseListedMailingData">DATE</li>
-		<li class="col-3-25" ng-click = "sortListedMailingData = 'forwarding_date'; reverseListedMailingData = !reverseListedMailingData">FORW. DATE</li>
-		<li class="col-4-25" ng-click = "sortListedMailingData = 'forwarding_method'; reverseListedMailingData = !reverseListedMailingData">FORW. METHOD</li>
+		<li class="col-4-25" ng-click = "sortListedMailingData = 'company_name'; reverseListedMailingData = !reverseListedMailingData">
+			{{language.mailing.data.menu.companyname}}
+		</li>
+		<li class="col-4-25" ng-click = "sortListedMailingData = 'sender_name'; reverseListedMailingData = !reverseListedMailingData">
+			{{language.mailing.data.menu.sendername}}
+		</li>
+		<li class="col-6-25" ng-click = "sortListedMailingData = 'sender_address'; reverseListedMailingData = !reverseListedMailingData">
+			{{language.mailing.data.menu.senderaddress}}
+		</li>
+		<li class="col-3-25" ng-click = "sortListedMailingData = 'receiving_date'; reverseListedMailingData = !reverseListedMailingData">
+			{{language.mailing.data.menu.recievingdate}}
+		</li>
+		<li class="col-3-25" ng-click = "sortListedMailingData = 'forwarding_date'; reverseListedMailingData = !reverseListedMailingData">
+			{{language.mailing.data.menu.forwardingdate}}
+		</li>
+		<li class="col-4-25" ng-click = "sortListedMailingData = 'forwarding_method'; reverseListedMailingData = !reverseListedMailingData">
+			{{language.mailing.data.menu.forwardingmethod}}
+		</li>
 	</ul><!-- mail shortlist menu END-->
 
 	<!-- MAIL SHORTLIST -->

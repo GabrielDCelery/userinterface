@@ -33,13 +33,7 @@ $price_of_serv_num = $request->price_of_serv_num;
 $price_of_serv_let = $request->price_of_serv_let;
 $company_address = $request->company_address;
 $company_register_id = $request->company_register_id;
-
-if($request->postal_service == "yes"){
-	$postal_service = 1;
-} else {
-	$postal_service = 0;
-}
-
+$postal_service = $request->postal_service;
 $postal_name = $request->postal_name;
 $postal_address = $request->postal_address;
 $manager_name = $request->manager_name;

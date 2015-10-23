@@ -38,13 +38,7 @@ $company_address = $request->company_address;
 $company_register_id = $request->company_register_id;
 $company_tax_id = $request->company_tax_id;
 $postal_number = $request->postal_number;
-
-if($request->postal_service == "yes"){
-	$postal_service = 1;
-} else {
-	$postal_service = 0;
-}
-
+$postal_service = $request->postal_service;
 $postal_name = $request->postal_name;
 $postal_address = $request->postal_address;
 $manager_name = $request->manager_name;

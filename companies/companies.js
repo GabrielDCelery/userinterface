@@ -1,13 +1,19 @@
 
-managerInterface.controller('companiesCtrl', function($scope, $http, $window, login, getCompanyNames, getManagerNames, companyFunctions, menuButtons, contract){
+managerInterface.controller('companiesCtrl', function($scope, $http, $window, login, language, getCompanyNames, getManagerNames, companyFunctions, menuButtons, contract){
 
-	login.checkLoginStatus(function(data){
-		if(data){
-			$scope.showContent = data;
-		} else {
-			$window.location.href = '';
-		}
-	});
+/***********************************************************************************
+LOGIN START
+***********************************************************************************/
+
+login.checkLoginStatus(function(data){
+	if(data){
+
+		$scope.showContent = data;
+
+		language.getData(function(data){
+			$scope.language = data;
+		
+
 
 /***********************************************************************************
 Logout
@@ -64,7 +70,6 @@ Variables and objects
 	}
 
 /* Form for adding new company */
-
 	$scope.addNewCompany = {
 		company_name: "",
 		starting_date: new Date(),
@@ -75,7 +80,7 @@ Variables and objects
 		service_provider: "Zeller és Zeller Kft.",
 		transfer_date: new Date(),
 		invoice_date: new Date(),
-		payment_method: "cash",
+		payment_method: $scope.language.companies.data.paymentmethod.cash,
 		account_number: "",
 		price_of_serv_num: 0,
 		price_of_serv_let: "",
@@ -83,11 +88,11 @@ Variables and objects
 		company_register_id: "",
 		company_tax_id: "",
 		postal_number: "",
-		postal_service: "yes",
+		postal_service: $scope.language.companies.data.postalservice.yes,
 		postal_name: "",
 		postal_address: "",
 		manager_name: "",
-		manager_status: "manager",
+		manager_status: $scope.language.companies.data.managerstatus.manager,
 		manager_id: "",
 		manager_mother_name: "",
 		manager_address: "",
@@ -96,7 +101,7 @@ Variables and objects
 	}
 
 /* Variable holding the data which email you are sending to comapnies */
-	$scope.subjectOfEmail = "Your contract expired";
+	$scope.subjectOfEmail = $scope.language.companies.form.email.contractexpired;
 
 /* Object holding the detailed companies information */
 	$scope.companiesDetailed = [];
@@ -112,13 +117,11 @@ Variables and objects
 	$scope.addNewCompanyMaster = angular.copy($scope.addNewCompany);
 	$scope.subjectOfEmailMaster = angular.copy($scope.subjectOfEmail);
 	$scope.selectedCompaniesMaster = angular.copy($scope.selectedCompanies);
-
 	$scope.displayMaster = angular.copy($scope.display);
 
 /***********************************************************************************
 Menu button functions
 ***********************************************************************************/
-
 	$scope.searchCompanyButton = function(){
 		menuButtons.changeFormDisplay("searchCompany", $scope.display.form, function(data){
 			$scope.display.form = data;
@@ -148,11 +151,10 @@ Menu button functions
 			$scope.display.form = data;
 			
 		})
-		console.log($scope.display)
 	}
 
 	$scope.resetDataButton = function(){
-		var confirmReset = confirm("Do you want to reset the page?");
+		var confirmReset = confirm($scope.language.companies.alert.resetpage);
 		if(confirmReset == true){
 			$scope.resetData();
 			$scope.resetDisplay();
@@ -160,7 +162,7 @@ Menu button functions
 	}
 
 /***********************************************************************************
-Filtering company names or managers before searching and lising data
+FORM - SEARCH / FILTER COMPANY/MANAGER NAMES
 ***********************************************************************************/
 
 	/* Make a google-like filtering of the listed company names */
@@ -188,7 +190,7 @@ Filtering company names or managers before searching and lising data
 	};
 
 /***********************************************************************************
-Search database for short company data
+FORM - SEARCH
 ***********************************************************************************/
 
 	$scope.sendFormForSearchingCompanyData = function(){
@@ -214,7 +216,26 @@ Search database for short company data
 	}
 
 /***********************************************************************************
-Get detailed info of selected companies
+FORM - EMAIL
+***********************************************************************************/
+	$scope.mailToSelectedCompanies = function (){
+		if($scope.selectedCompanies.id.length == 0){
+			alert($scope.language.companies.alert.checklistempty);
+		} else {
+			$scope.selectedCompanies.mail = $scope.subjectOfEmail;
+			companyFunctions.connectToDatabase(
+				'POST',
+				'companies/mail_to_selected_companies.php',
+				$scope.selectedCompanies,
+				function(data){
+					console.log(data);
+				}
+			)
+		}
+	}
+
+/***********************************************************************************
+FORM - DETAILS
 ***********************************************************************************/
 
 	$scope.formListDetailedCompaniesInfo = function (){
@@ -222,7 +243,7 @@ Get detailed info of selected companies
 		$scope.display.data.companiesDetailed = true;
 		$scope.display.data.companiesExtendContract = false;
 		if($scope.selectedCompanies.id.length == 0){
-			alert("You haven't selected anything");
+			alert($scope.language.companies.alert.checklistempty);
 		} else {
 			companyFunctions.connectToDatabase(
 				'POST',
@@ -244,11 +265,8 @@ Get detailed info of selected companies
 
 /* Overwrite detailed company information */
 	$scope.overwriteCompanyData = function(data){
-		if(data.postal_service == "yes"){
-			data.postal_service = 1;
-		} else {
-			data.postal_service = 0;
-		}
+
+		data = language.postalServiceConverter(data, $scope.language);
 
 		companyFunctions.connectToDatabase(
 			'POST',
@@ -256,17 +274,22 @@ Get detailed info of selected companies
 			data,
 			function(data){
 				$scope.formListDetailedCompaniesInfo();
-				alert("Data successfully overwritten");
+				alert($scope.language.companies.alert.successfuloverwrite);
 			}
 		)
 	}
 
+
+/***********************************************************************************
+FORM - EXTEND
+***********************************************************************************/
+
 /* Change contract status */
 	$scope.formChangeContractStatus = function(){
 		if($scope.selectedCompanies.id.length == 0){
-			alert("You haven't selected anything");
+			alert($scope.language.companies.alert.checklistempty);
 		} else {
-			var alertChangeContract = confirm("Do you want to change the status of the selected company/companies?");
+			var alertChangeContract = confirm($scope.language.companies.confirm.changecontractstatus);
 			if(alertChangeContract){
 				companyFunctions.connectToDatabase(
 					'POST',
@@ -274,14 +297,15 @@ Get detailed info of selected companies
 					$scope.selectedCompanies,
 					function(data){
 						$scope.sendFormForSearchingCompanyData();
-						alert(data);
+						alert($scope.language.companies.alert.changedcontractstatus);
 					}
 				)
 			}
 		}
 	}
 
-/* Show detailed information for extending contract */
+
+/* Show contract */
 	$scope.formExtendContract = function(){
 		$scope.companyDataForExtendingContract = {};
 
@@ -289,9 +313,9 @@ Get detailed info of selected companies
 		$scope.display.data.companiesExtendContract = true;
 
 		if($scope.selectedCompanies.id.length == 0){
-			alert("You haven't selected anything!");
+			alert($scope.language.companies.alert.checklistempty);
 		} else if($scope.selectedCompanies.id.length > 1) {
-			alert("You can only extend the contract of one company at a time!");
+			alert($scope.language.companies.alert.selectonlyone);
 		} else {
 			companyFunctions.connectToDatabase(
 				'POST',
@@ -314,68 +338,53 @@ Get detailed info of selected companies
 
 /* Extend company contract */
 	$scope.addExtendedContract = function(data){
+
+		data = language.postalServiceConverter(data, $scope.language);
+
 		companyFunctions.connectToDatabase(
 			'POST',
 			'companies/form_extend_contract.php',
 			data,
 			function(data){
-				alert(data);
+				alert($scope.language.companies.alert.changecontractstatus);
 			}
 		)
 	}
 
 /***********************************************************************************
-Send email to selected companies
-***********************************************************************************/
-	$scope.mailToSelectedCompanies = function (){
-		if($scope.selectedCompanies.id.length == 0){
-			alert("You haven't selected anything");
-		} else {
-			$scope.selectedCompanies.mail = $scope.subjectOfEmail;
-			companyFunctions.connectToDatabase(
-				'POST',
-				'companies/mail_to_selected_companies.php',
-				$scope.selectedCompanies,
-				function(data){
-					console.log(data);
-				}
-			)
-		}
-	}
-
-/***********************************************************************************
-Add new company to database
+FORM - ADD NEW
 ***********************************************************************************/
 
-	$scope.formAddNewCompany = function(){
+	$scope.formAddNewCompany = function(data){
+
+		data = language.postalServiceConverter(data, $scope.language);
+
 		companyFunctions.connectToDatabase(
 			'POST',
 			'companies/form_add_new_company.php',
-			$scope.addNewCompany,
+			data,
 			function(data){
-				alert(data);
+				alert($scope.language.companies.alert.newcompanyadded);
 			}
 		)
+
 	}
 
 /***********************************************************************************
-Print Contract
+PRINT CONTRACT
 ***********************************************************************************/
 	
 	$scope.newContract = function(input){
-		contract.createContract(input, function(){
-			window.location.replace("companies/contract.docx");
-		})
-	}
 
-	$scope.existingContract = function(input){
+		input = language.postalServiceConverter(input, $scope.language);
+
 		contract.createContract(input, function(){
 			window.location.replace("companies/contract.docx");
 		})
 	}
 
 /***********************************************************************************
-Checklist model
+CHECKLIST MODEL
 ***********************************************************************************/
 
 	$scope.checkAll = function (){
@@ -391,7 +400,7 @@ Checklist model
 	}
 
 /***********************************************************************************
-Reset data
+RESET DATA
 ***********************************************************************************/
 
 	$scope.resetData = function(){
@@ -410,5 +419,14 @@ Reset data
 		$scope.display = angular.copy($scope.displayMaster);
 	}
 
+/***********************************************************************************
+LOGIN END
+***********************************************************************************/
+		})
+	} else {
+		$window.location.href = '';
+	}
 
-})
+});
+
+}) //End of controller

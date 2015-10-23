@@ -1,5 +1,9 @@
 var managerInterface = angular.module('managerInterface', ['ngRoute','checklist-model']);
 
+/***********************************************************************************
+ROUTING
+***********************************************************************************/
+
 managerInterface.config(function($routeProvider){
 	$routeProvider.when('/', {
 		templateUrl: 'login/login.html',
@@ -17,6 +21,11 @@ managerInterface.config(function($routeProvider){
 		redirectTo: '/'
 	})
 })
+
+
+/***********************************************************************************
+LOGIN FACTORY
+***********************************************************************************/
 
 managerInterface.factory("login", function($http){
 
@@ -45,6 +54,49 @@ managerInterface.factory("login", function($http){
 	}
 
 })
+
+/***********************************************************************************
+LANGUAGE FACTORY
+***********************************************************************************/
+
+managerInterface.factory("language", function($http){
+
+	var cachedData;
+
+	function getData(callback){
+		if(cachedData){
+			callback(cachedData);
+		} else {
+			$http.get("language.json").success(function(data){
+				cachedData = data;
+				callback(data);
+			})
+		}
+	}
+
+	function postalServiceConverter(input, languageFile){
+
+		var inputData = angular.copy(input);
+
+		if(inputData.postal_service == languageFile.companies.data.postalservice.yes){
+			inputData.postal_service = 1;
+		} else {
+			inputData.postal_service = 0;
+		}
+		
+		return inputData;
+	}
+
+	return {
+		getData: getData,
+		postalServiceConverter: postalServiceConverter
+	}
+})
+
+
+/***********************************************************************************
+GETTING AND FILTERING COMPANY NAMES FACTORY
+***********************************************************************************/
 
 managerInterface.factory("getCompanyNames", function($http){
 
@@ -157,9 +209,14 @@ managerInterface.factory("getMailingAddresses", function($http){
 
 })
 
-managerInterface.factory("companyFunctions", function($http){
+managerInterface.factory("companyFunctions", function($http, language){
 
 	var data;
+	var language
+
+	language.getData(function(data){
+		language = data;
+	})
 
 	function convertDate(stringDate){
 		var outputDate = new Date(stringDate);
@@ -218,9 +275,9 @@ managerInterface.factory("companyFunctions", function($http){
 	function formatPostalServiceToString(){
 		this.data.map(function(obj){
 			if(obj.postal_service == 1){
-				obj.postal_service = "yes";
+				obj.postal_service = language.companies.data.postalservice.yes;
 			} else {
-				obj.postal_service = "no";
+				obj.postal_service = language.companies.data.postalservice.no;
 			}
 		})
 		return this;
@@ -310,6 +367,7 @@ managerInterface.factory("menuButtons", function(){
 managerInterface.factory("contract", function($http){
 
 	function createContract(input, callback){
+
 		$http({
 			method: 'POST',
 			url: 'companies/document_create_contract.php',
